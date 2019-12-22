@@ -27,16 +27,17 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 			   temp /= 10;
 		   }
 
-	   char str_a_m[len_a_m];
-	   str_a_m[len_a_m-1] = '\0';
-	   char str_b_m[len_b_m];
-	   str_b_m[len_b_m-1] = '\0';
-	   char str_res[len_a_m + len_b_m];
+	   char str_a_m[len_a_m+1];
+	   str_a_m[len_a_m] = '\0';
+	   char str_b_m[len_b_m+1];
+	   str_b_m[len_b_m] = '\0';
+	   char str_res[len_a_m + len_b_m+1];
 	   
-	   for(int i = 0; i < len_a_m + len_b_m - 1; i ++) {
+	   for(int i = 0; i < len_a_m + len_b_m; i ++) {
 	       str_res[i] = '0';
 	   }
-	   str_res[len_a_m + len_b_m - 1] = '\0';
+	   str_res[len_a_m + len_b_m] = '\0';
+	   
 	   temp = a_m;
 	   for(int i = 0; i < len_a_m; i ++) {
 	       str_a_m[len_a_m - i - 1] = (temp % 10) + '0';
