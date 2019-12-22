@@ -68,7 +68,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 			   else {
 			       str_res[len_a_m+len_b_m-1-i-j] = res - ':' + str_res[len_a_m+len_b_m-1-i-j];
                    str_res[len_a_m+len_b_m-1-i-j-1] += 1;
-	       //    printf("str res:%s\n",str_res);
+	           printf("str res:%s\n",str_res);
 			   }
 		   }
 	   }
