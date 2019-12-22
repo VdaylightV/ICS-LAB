@@ -49,6 +49,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	   printf("str a_m:%s\n",str_a_m);
 	   printf("val b_m:%ld\n",b_m);
 	   printf("str b_m:%s\n",str_b_m);
+	   printf("str res:%s\n",str_res);
 	   for(int i = 0; i < len_b_m; i ++) {
 	       char bit_b = str_b_m[len_b_m-1-i];
 		   for(int j = 0; j < len_a_m; j ++) {
