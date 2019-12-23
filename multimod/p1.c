@@ -112,7 +112,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	               printf("temp res:%s\n",temp_res);
 		   
 		   
-		   for(int k = 0; k < len_a_m + len_b_m; i ++) {
+		   for(int k = 0; k < len_a_m + len_b_m; k ++) {
 		       int bit = temp_res[len_a_m + len_b_m-1-k];
 			   if(str_res[len_a_m + len_b_m-1-k] + bit <= '9') {
 			       str_res[len_a_m + len_b_m-1-k] += bit;
@@ -128,7 +128,6 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 				   }
 			   }
 
-		   
 			   }
 	   }
        printf("multi:%s\n", str_res); 
