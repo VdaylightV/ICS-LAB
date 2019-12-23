@@ -200,7 +200,8 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	       if(compare(str_res, len_a_m+len_b_m+1, str_m, len_a_m+len_b_m+1) == 0) {
 		       res = 0;
 		   }
-		   
+		  
+		   printf("res:%s\n",str_res); 
 		   else {
 		       for(int i = 0; i < len_a_m+len_b_m; i ++) {
 			       int bit_res = str_res[len_a_m+len_b_m-1-i];
