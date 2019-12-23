@@ -161,7 +161,8 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	       str_m[len_a_m + len_b_m - i - 1] = (temp % 10) + '0';
 		   temp /= 10;
 	   }
-       printf("multi:%s\n", str_m); 
+       printf("mod_str:%s\n", str_m); 
+       printf("mod_val:%d\n", m); 
 	   }
 	   }
        
