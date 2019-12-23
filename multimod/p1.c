@@ -238,8 +238,30 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 							           str_res[len_a_m+len_b_m-1-i] = '0' + gap + 10;
 							       }
 								   else {
-		                               printf("res:%s\n",str_res); 
-								       assert(0); //这些步骤也是为了处理连续借位的情况
+						               if(str_res[len_a_m+len_b_m-1-i-1-1-1-1-1] != '0') {
+						                   str_res[len_a_m+len_b_m-1-i-1-1-1-1-1] -= 1;
+							               str_res[len_a_m+len_b_m-1-i-1-1-1-1] = '9';
+							               str_res[len_a_m+len_b_m-1-i-1-1-1] = '9';
+							               str_res[len_a_m+len_b_m-1-i-1-1] = '9';
+							               str_res[len_a_m+len_b_m-1-i-1] = '9';
+							               str_res[len_a_m+len_b_m-1-i] = '0' + gap + 10;
+							           }
+									   else {
+						                   if(str_res[len_a_m+len_b_m-1-i-1-1-1-1-1-1] != '0') {
+						                       str_res[len_a_m+len_b_m-1-i-1-1-1-1-1-1] -= 1;
+							                   str_res[len_a_m+len_b_m-1-i-1-1-1-1-1] = '9';
+							                   str_res[len_a_m+len_b_m-1-i-1-1-1-1] = '9';
+							                   str_res[len_a_m+len_b_m-1-i-1-1-1] = '9';
+							                   str_res[len_a_m+len_b_m-1-i-1-1] = '9';
+							                   str_res[len_a_m+len_b_m-1-i-1] = '9';
+							                   str_res[len_a_m+len_b_m-1-i] = '0' + gap + 10;
+							           }
+										   else {
+		                                       printf("res:%s\n",str_res); 
+								               assert(0); //这些步骤也是为了处理连续借位的情况
+										   }
+										   
+									   }
 								   }
 						       }
 						   }
