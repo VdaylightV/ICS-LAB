@@ -62,14 +62,28 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 		       char bit_a = str_a_m[len_a_m-1-j];
 			   int res = (bit_a - '0') * (bit_b - '0');
 			   
-			   if(str_res[len_a_m+len_b_m-1-i-j] + res <= '9') {
-			       str_res[len_a_m+len_b_m-1-i-j] += res;
-			   }	   
+               if(res <= 9) {
+			       if(str_res[len_a_m+len_b_m-1-i-j] + res <= '9') {
+			           str_res[len_a_m+len_b_m-1-i-j] += res;
+			       }	   
+			       else {
+			           str_res[len_a_m+len_b_m-1-i-j] = res - ':' + str_res[len_a_m+len_b_m-1-i-j];
+                       str_res[len_a_m+len_b_m-1-i-j-1] += 1;
+			       }
+			   }               
+              
 			   else {
-			       str_res[len_a_m+len_b_m-1-i-j] = res - ':' + str_res[len_a_m+len_b_m-1-i-j];
-                   str_res[len_a_m+len_b_m-1-i-j-1] += 1;
-	           printf("str res:%s\n",str_res);
+				   char forward_bit = (res/10) + '0';
+				   char left_bit = (res%10) + '0';
+			       if(str_res[len_a_m+len_b_m-1-i-j] + res <= '9') {
+			           str_res[len_a_m+len_b_m-1-i-j] += res;
+			       }	   
+			       else {
+			           str_res[len_a_m+len_b_m-1-i-j] = res - ':' + str_res[len_a_m+len_b_m-1-i-j];
+                       str_res[len_a_m+len_b_m-1-i-j-1] += 1;
+	               //printf("str res:%s\n",str_res);
 			   }
+		   }
 		   }
 	   }
        //printf("multi:%s\n", str_res); 
