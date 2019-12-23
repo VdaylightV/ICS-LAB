@@ -68,18 +68,18 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	   printf("len b_m:%d\n",len_b_m);
 	   */
 
-	   for(int i = 0; i < len_b_m; i ++) {
+	   for(int i = 0; i < len_b_m; i ++) { //对应于下面一行的每一位
 //			   printf("up_bit%d@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n",i);
+
+	           for(int i = 0; i < len_a_m + len_b_m; i ++) { //对应于上面一行的每一位
+	               temp_res[i] = '0';
+	           }
+	           temp_res[len_a_m + len_b_m] = '\0'; //由于竖式实际上是将下面的数的每一位去乘上面的数，因此，先把储存乘出来结果的数组清空
 
 	       char bit_b = str_b_m[len_b_m-1-i]; //竖式下面的那一行的每一位进行循环
 
 		   for(int j = 0; j < len_a_m; j ++) {
 			   printf("down_bit%d-------------------------------------------------\n",j);
-
-	           for(int i = 0; i < len_a_m + len_b_m; i ++) {
-	               temp_res[i] = '0';
-	           }
-	           temp_res[len_a_m + len_b_m] = '\0'; //由于竖式实际上是将下面的数的每一位去乘上面的数，因此，先把储存乘出来结果的数组清空
 
 		       char bit_a = str_a_m[len_a_m-1-j]; //对下面竖式的每一位进行循环
 			   int res = (bit_a - '0') * (bit_b - '0'); //计算两位数相乘的结果
