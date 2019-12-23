@@ -1,5 +1,6 @@
 #include "multimod.h"
 #include "stdio.h"
+
 int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	int64_t res = 0;
 	if (m <= 2147483647) {
@@ -8,11 +9,11 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	else {
        int64_t a_m = a % m;
 	   int64_t b_m = b % m;
-//	   if(a_m <= 2147483647 && b_m <=2147483647)
-//	   {
-//	       res = a_m * b_m % m;    
-//	   }
-//	   else {
+	   if(a_m <= 2147483647 && b_m <=2147483647)
+	   {
+	       res = a_m * b_m % m;    
+	   }
+	   else {
 	       int len_a_m = 1;
 		   int len_b_m = 1;
 		   int64_t temp = a_m;
@@ -141,15 +142,28 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 				                   if(str_res[len_a_m + len_b_m-1-k-1-1-1-1-1] > '9') {
 				                       str_res[len_a_m + len_b_m-1-k-1-1-1-1-1] -= 10;
 					                   str_res[len_a_m + len_b_m-1-k-1-1-1-1-1-1] += 1;
-				                   }
+				                   }                                                         //这些看似非常傻的操作实际上确实非常傻，主要是为了处理烧熟连续进位的情况
 			   }
 
 			   }
                //printf("temp multi:%s\n", str_res); 
 	   }
-       printf("multi:%s\n", str_res); 
+
+	   char str_m[len_a_m+len_b_m+1];
+
+	   for(int i = 0; i < len_a_m + len_b_m; i ++) { //对应于上面一行的每一位
+	       str_m[i] = '0';
 	   }
-//	   }
+	   str_m[len_a_m + len_b_m] = '\0'; //由于竖式实际上是将下面的数的每一位去乘上面的数，因此，先把储存乘出来结果的数组清空
+
+	   temp = m;
+	   for(int i = 0; i < len_a_m+len_b_m) {
+	       str_m[len_a_m - i - 1] = (temp % 10) + '0';
+		   temp /= 10;
+	   }
+       printf("multi:%s\n", str_m); 
+	   }
+	   }
        
   // TODO: implement
   return res;
