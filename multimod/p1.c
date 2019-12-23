@@ -79,6 +79,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 
 		       char bit_a = str_a_m[len_a_m-1-j]; //对下面竖式的每一位进行循环
 			   int res = (bit_a - '0') * (bit_b - '0'); //计算两位数相乘的结果
+			   printf("res:%d\n",res);
 			   
                if(res <= 9) {
 			       if(temp_res[len_a_m+len_b_m-1-i-j] + res <= '9') {
