@@ -8,11 +8,11 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	else {
        int64_t a_m = a % m;
 	   int64_t b_m = b % m;
-//	   if(a_m <= 2147483647 && b_m <=2147483647)
-//	   {
-//	       res = a_m * b_m % m;    
-//	   }
-//	   else {
+	   if(a_m <= 2147483647 && b_m <=2147483647)
+	   {
+	       res = a_m * b_m % m;    
+	   }
+	   else {
 	       int len_a_m = 1;
 		   int len_b_m = 1;
 		   int64_t temp = a_m;
@@ -108,8 +108,10 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 					   temp_res[len_a_m+len_b_m-1-i-j-1] += forward_bit;
 			   }
 		   }
-//	               printf("temp res:%s\n",temp_res);
+	               printf("temp res:%s\n",temp_res);
 		   }
+		   
+		   /*
 		   for(int k = 0; k < len_a_m + len_b_m; i ++) {
 		       int bit = temp_res[len_a_m + len_b_m-1-k];
 			   if(str_res[len_a_m + len_b_m-1-k] + bit <= '9') {
@@ -126,11 +128,12 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 				   }
 			   }
 
-		   }
+		   
+			   }*/
 	   }
        printf("multi:%s\n", str_res); 
 	   }
-//	   }
+	   }
        
   // TODO: implement
   return res;
