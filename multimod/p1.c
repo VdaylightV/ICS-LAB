@@ -32,12 +32,18 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	   char str_b_m[len_b_m+1];
 	   str_b_m[len_b_m] = '\0';
 	   char str_res[len_a_m + len_b_m+1];
+	   char temp_res[len_a_m+len_b_m+1];
 	   
 	   for(int i = 0; i < len_a_m + len_b_m; i ++) {
 	       str_res[i] = '0';
 	   }
 	   str_res[len_a_m + len_b_m] = '\0';
 	   
+	   for(int i = 0; i < len_a_m + len_b_m; i ++) {
+	       temp_res[i] = '0';
+	   }
+	   temp_res[len_a_m + len_b_m] = '\0';
+
 	   temp = a_m;
 	   for(int i = 0; i < len_a_m; i ++) {
 	       str_a_m[len_a_m - i - 1] = (temp % 10) + '0';
@@ -49,6 +55,8 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	       str_b_m[len_b_m - i - 1] = (temp % 10) + '0';
 		   temp /= 10;
 	   }
+
+	   /*
 	   printf("val a_m:%ld\n",a_m);
 	   printf("str a_m:%s\n",str_a_m);
 	   printf("val b_m:%ld\n",b_m);
@@ -56,34 +64,46 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	   printf("str res:%s\n",str_res);
 	   printf("len a_m:%d\n",len_a_m);
 	   printf("len b_m:%d\n",len_b_m);
+	   */
+
 	   for(int i = 0; i < len_b_m; i ++) {
-	       char bit_b = str_b_m[len_b_m-1-i];
+
+	       char bit_b = str_b_m[len_b_m-1-i]; //竖式下面的那一行的每一位进行循环
+
 		   for(int j = 0; j < len_a_m; j ++) {
-		       char bit_a = str_a_m[len_a_m-1-j];
-			   int res = (bit_a - '0') * (bit_b - '0');
+
+	           for(int i = 0; i < len_a_m + len_b_m; i ++) {
+	               temp_res[i] = '0';
+	           }
+	           temp_res[len_a_m + len_b_m] = '\0'; //由于竖式实际上是将下面的数的每一位去乘上面的数，因此，先把储存乘出来结果的数组清空
+
+		       char bit_a = str_a_m[len_a_m-1-j]; //对下面竖式的每一位进行循环
+			   int res = (bit_a - '0') * (bit_b - '0'); //计算两位数相乘的结果
 			   
                if(res <= 9) {
-			       if(str_res[len_a_m+len_b_m-1-i-j] + res <= '9') {
-			           str_res[len_a_m+len_b_m-1-i-j] += res;
-			       }	   
+			       if(temp_res[len_a_m+len_b_m-1-i-j] + res <= '9') {
+			           temp_res[len_a_m+len_b_m-1-i-j] += res;
+			       }	   //若乘出来的结果加到相应的temp_res位上，不产生进位，那么简单的temp_res位做加法即可
 			       else {
-			           str_res[len_a_m+len_b_m-1-i-j] = res - ':' + str_res[len_a_m+len_b_m-1-i-j];
-                       str_res[len_a_m+len_b_m-1-i-j-1] += 1;
-			       }
+			           temp_res[len_a_m+len_b_m-1-i-j] = res - 10 + temp_res[len_a_m+len_b_m-1-i-j];
+                       temp_res[len_a_m+len_b_m-1-i-j-1] += 1;
+			       }       //若产生进位，由于结果<=9那么至多进位为1，故前面的一位加1即可，后面的一位保留进位后的结果
 			   }               
               
-			   else {
-				   char forward_bit = (res/10) + '0';
-				   char left_bit = (res%10) + '0';
-			       if(str_res[len_a_m+len_b_m-1-i-j] + res <= '9') {
-			           str_res[len_a_m+len_b_m-1-i-j] += res;
+			   else {  //若相乘结果大于9，此时需额外考虑进位
+				   int forward_bit = res/10;  //提取出相乘结果的十位
+				   int left_bit = res%10;     //提取出相乘结果的个位
+			       if(temp_res[len_a_m+len_b_m-1-i-j] + left_bit <= '9') { //若相乘结果的个位加到temp_res后不产生进位
+			           temp_res[len_a_m+len_b_m-1-i-j] += left_bit;        //那么forward_bit就是进位，放到前一位即可
+					   temp_res[len_a_m+len_b_m-1-i-j-1] += forward_bit;
 			       }	   
-			       else {
-			           str_res[len_a_m+len_b_m-1-i-j] = res - ':' + str_res[len_a_m+len_b_m-1-i-j];
-                       str_res[len_a_m+len_b_m-1-i-j-1] += 1;
-	               //printf("str res:%s\n",str_res);
+			       else {                                                  //若相乘结果个位加到temp_res后产生进位 
+					   forward_bit += 1;                                   //此时的进位至多为1，forward_bit加1是进位
+					   temp_res[len_a_m+len_b_m-1-i-j] = temp_res[len_a_m+len_b_m-1-i-j] + left_bit - 10;
+					   temp_res[len_a_m+len_b_m-1-i-j-1] += forward_bit;
 			   }
 		   }
+	               printf("temp res:%s\n",str_res);
 		   }
 	   }
        //printf("multi:%s\n", str_res); 
