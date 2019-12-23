@@ -93,7 +93,9 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
               
 			   else {  //若相乘结果大于9，此时需额外考虑进位
 				   int forward_bit = res/10;  //提取出相乘结果的十位
+			       printf("forward_bit:%d\n",forward_bit);
 				   int left_bit = res%10;     //提取出相乘结果的个位
+			       printf("left_bit:%d\n",left_bit);
 			       if(temp_res[len_a_m+len_b_m-1-i-j] + left_bit <= '9') { //若相乘结果的个位加到temp_res后不产生进位
 			           temp_res[len_a_m+len_b_m-1-i-j] += left_bit;        //那么forward_bit就是进位，放到前一位即可
 					   temp_res[len_a_m+len_b_m-1-i-j-1] += forward_bit;
