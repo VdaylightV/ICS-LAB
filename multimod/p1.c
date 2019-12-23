@@ -31,13 +31,15 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	   str_a_m[len_a_m] = '\0';
 	   char str_b_m[len_b_m+1];
 	   str_b_m[len_b_m] = '\0';
-	   char str_res[len_a_m + len_b_m+1];
+	   //char str_res[len_a_m + len_b_m+1];
 	   char temp_res[len_a_m+len_b_m+1];
 	   
+	   /*
 	   for(int i = 0; i < len_a_m + len_b_m; i ++) {
 	       str_res[i] = '0';
 	   }
 	   str_res[len_a_m + len_b_m] = '\0';
+	   */
 	   
 	   for(int i = 0; i < len_a_m + len_b_m; i ++) {
 	       temp_res[i] = '0';
