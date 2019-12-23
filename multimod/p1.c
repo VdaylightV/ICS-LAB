@@ -69,7 +69,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	   */
 
 	   for(int i = 0; i < len_b_m; i ++) {
-			   printf("up_bit%d@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n",i);
+//			   printf("up_bit%d@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n",i);
 
 	       char bit_b = str_b_m[len_b_m-1-i]; //竖式下面的那一行的每一位进行循环
 
