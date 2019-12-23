@@ -6,8 +6,8 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
        res =  ((a%m) * (b%m)) % m; 
 	}
 	else {
-//       int64_t a_m = a % m;
-//	   int64_t b_m = b % m;
+       int64_t a_m = a % m;
+	   int64_t b_m = b % m;
 //	   if(a_m <= 2147483647 && b_m <=2147483647)
 //	   {
 //	       res = a_m * b_m % m;    
