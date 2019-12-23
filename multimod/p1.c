@@ -126,6 +126,14 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 				       str_res[len_a_m + len_b_m-1-k-1] -= 10;
 					   str_res[len_a_m + len_b_m-1-k-1-1] += 1;
 				   }
+				       if(str_res[len_a_m + len_b_m-1-k-1-1] > '9') {
+				           str_res[len_a_m + len_b_m-1-k-1-1] -= 10;
+					       str_res[len_a_m + len_b_m-1-k-1-1-1] += 1;
+				       }
+				           if(str_res[len_a_m + len_b_m-1-k-1-1-1] > '9') {
+				               str_res[len_a_m + len_b_m-1-k-1-1-1] -= 10;
+					           str_res[len_a_m + len_b_m-1-k-1-1-1-1] += 1;
+				           }
 			   }
 
 			   }
