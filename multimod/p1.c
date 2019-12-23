@@ -108,8 +108,8 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 					   temp_res[len_a_m+len_b_m-1-i-j-1] += forward_bit;
 			   }
 		   }
-	               printf("temp res:%s\n",temp_res);
 		   }
+	               printf("temp res:%s\n",temp_res);
 		   
 		   /*
 		   for(int k = 0; k < len_a_m + len_b_m; i ++) {
