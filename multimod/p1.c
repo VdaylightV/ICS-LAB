@@ -71,6 +71,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	       char bit_b = str_b_m[len_b_m-1-i]; //竖式下面的那一行的每一位进行循环
 
 		   for(int j = 0; j < len_a_m; j ++) {
+			   printf("bit%d-------------------------------------------------\n",j);
 
 	           for(int i = 0; i < len_a_m + len_b_m; i ++) {
 	               temp_res[i] = '0';
@@ -106,7 +107,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 					   temp_res[len_a_m+len_b_m-1-i-j-1] += forward_bit;
 			   }
 		   }
-	               printf("temp res:%s\n",str_res);
+	               printf("temp res:%s\n",temp_res);
 		   }
 	   }
        //printf("multi:%s\n", str_res); 
