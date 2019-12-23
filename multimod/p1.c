@@ -79,11 +79,11 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	       char bit_b = str_b_m[len_b_m-1-i]; //竖式下面的那一行的每一位进行循环
 
 		   for(int j = 0; j < len_a_m; j ++) {
-			   printf("down_bit%d-------------------------------------------------\n",j);
+//			   printf("down_bit%d-------------------------------------------------\n",j);
 
 		       char bit_a = str_a_m[len_a_m-1-j]; //对下面竖式的每一位进行循环
 			   int res = (bit_a - '0') * (bit_b - '0'); //计算两位数相乘的结果
-			   printf("res:%d\n",res);
+//			   printf("res:%d\n",res);
 			   
                if(res <= 9) {
 			       if(temp_res[len_a_m+len_b_m-1-i-j] + res <= '9') {
@@ -97,9 +97,9 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
               
 			   else {  //若相乘结果大于9，此时需额外考虑进位
 				   int forward_bit = res/10;  //提取出相乘结果的十位
-			       printf("forward_bit:%d\n",forward_bit);
+//			       printf("forward_bit:%d\n",forward_bit);
 				   int left_bit = res%10;     //提取出相乘结果的个位
-			       printf("left_bit:%d\n",left_bit);
+//			       printf("left_bit:%d\n",left_bit);
 			       if(temp_res[len_a_m+len_b_m-1-i-j] + left_bit <= '9') { //若相乘结果的个位加到temp_res后不产生进位
 			           temp_res[len_a_m+len_b_m-1-i-j] += left_bit;        //那么forward_bit就是进位，放到前一位即可
 					   temp_res[len_a_m+len_b_m-1-i-j-1] += forward_bit;
@@ -110,7 +110,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 					   temp_res[len_a_m+len_b_m-1-i-j-1] += forward_bit;
 			   }
 		   }
-	               printf("temp res:%s\n",temp_res);
+//	               printf("temp res:%s\n",temp_res);
 		   }
 	   }
        //printf("multi:%s\n", str_res); 
