@@ -210,7 +210,24 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 				   if(gap >= 0) {
 				       str_res[len_a_m+len_b_m-1-i] = '0' + gap;
 				   }
-				   
+                   
+				   else {
+
+					   int index = 1;
+					   while(str_res[len_a_m+len_b_m-1-i-index] == '0') {
+                           index ++;
+					   }
+
+					   str_res[len_a_m+len_b_m-1-i-index] -= 1;
+					   index --;
+
+					   for(; index > 0; index --) {
+                           str_res[len_a_m+len_b_m-1-i-index] = '9';
+					   }
+
+					   str_res[len_a_m+len_b_m-1-i] = '0' + gap + 10;
+				   }
+				  /* 
 				   else {
 			           if(str_res[len_a_m+len_b_m-1-i-1] != '0') {
 					       str_res[len_a_m+len_b_m-1-i-1] -= 1;
@@ -280,6 +297,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 					   }
 				   }
 			   }
+			   */
 		   }
 	   }
 	   printf("res:%s\n",str_res);
