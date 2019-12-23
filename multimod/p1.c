@@ -1,5 +1,6 @@
 #include "multimod.h"
 #include "stdio.h"
+#include "assert.h"
 
 static inline int compare(char a[], int len_a, char m[], int len_m) {
    int bit_count_a = 0;
@@ -202,12 +203,12 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 		   
 		   else {
 		       for(int i = 0; i < len_a_m+len_b_m; i ++) {
-			       int bit_res = str_res[len_a+len_b_m-1-i];
+			       int bit_res = str_res[len_a_m+len_b_m-1-i];
 			       int bit_m = str_m[len_a+len_b_m-1-i];
 				   int gap = bit_res-bit_m;
 
 				   if(gap >= 0) {
-				       str_res[len_a_m+len_m-1-i] = '0' + gap;
+				       str_res[len_a_m+len_b_m-1-i] = '0' + gap;
 				   }
 				   
 				   else {
