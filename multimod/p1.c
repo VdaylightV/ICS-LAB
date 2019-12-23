@@ -157,7 +157,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	   str_m[len_a_m + len_b_m] = '\0'; //由于竖式实际上是将下面的数的每一位去乘上面的数，因此，先把储存乘出来结果的数组清空
 
 	   temp = m;
-	   for(int i = 0; i < len_a_m+len_b_m) {
+	   for(int i = 0; i < len_a_m+len_b_m; i ++) {
 	       str_m[len_a_m - i - 1] = (temp % 10) + '0';
 		   temp /= 10;
 	   }
