@@ -158,7 +158,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 
 	   temp = m;
 	   for(int i = 0; i < len_a_m+len_b_m; i ++) {
-	       str_m[len_a_m - i - 1] = (temp % 10) + '0';
+	       str_m[len_a_m + len_b_m - i - 1] = (temp % 10) + '0';
 		   temp /= 10;
 	   }
        printf("multi:%s\n", str_m); 
