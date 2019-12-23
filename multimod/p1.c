@@ -1,6 +1,39 @@
 #include "multimod.h"
 #include "stdio.h"
 
+static inline int compare(char a[], int len_a, char m[], int len_m) {
+   int bit_count_a = 0;
+   while(a[bit_count_a] == '0') {
+       bit_count_a ++;
+   } 
+
+   int bit_count_m = 0;
+   while(m[bit_count_m] == '0') {
+       bit_count_m ++;
+   } 
+
+   if(bit_count_a < bit_count_m) {
+       return 1;
+   }
+
+   else if(bit_count_a > bit_count_m) {
+       return -1;
+   }
+
+   else {
+       for(int i = bit_count_a; i < len_a-1; i ++) {
+	       if(a[bit_count_a] > m[bit_count_m]) {
+		       return 1;
+		   }
+
+	       else if(a[bit_count_a] < m[bit_count_m]) {
+		       return -1;
+		   }
+	   }
+	   return 0;
+   }
+}
+
 int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	int64_t res = 0;
 	if (m <= 2147483647) {
@@ -161,8 +194,62 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	       str_m[len_a_m + len_b_m - i - 1] = (temp % 10) + '0';
 		   temp /= 10;
 	   }
-       printf("mod_str:%s\n", str_m); 
-       printf("mod_val:%ld\n", m); 
+
+	   while(compare(str_res, len_a_m+len_b_m+1, str_m, len_a_m+len_b_m+1) >= 0) {
+	       if(compare(str_res, len_a_m+len_b_m+1, str_m, len_a_m+len_b_m+1) == 0) {
+		       res = 0;
+		   }
+		   
+		   else {
+		       for(int i = 0; i < len_a_m+len_b_m; i ++) {
+			       int bit_res = str_res[len_a+len_b_m-1-i];
+			       int bit_m = str_m[len_a+len_b_m-1-i];
+				   int gap = bit_res-bit_m;
+
+				   if(gap >= 0) {
+				       str_res[len_a_m+len_m-1-i] = '0' + gap;
+				   }
+				   
+				   else {
+			           if(str_res[len_a_m+len_b_m-1-i-1] != '0') {
+					       str_res[len_a_m+len_b_m-1-i-1] -= 1;
+						   str_res[len_a_m+len_b_m-1-i] = '0' + gap + 10;
+					   }	       
+					   else {
+					       if(str_res[len_a_m+len_b_m-1-i-1-1] != '0') {
+						       str_res[len_a_m+len_b_m-1-i-1-1] -= 1;
+							   str_res[len_a_m+len_b_m-1-i-1] = '9';
+							   str_res[len_a_m+len_b_m-1-i] = '0' + gap + 10;
+						   }
+						   else {
+						       if(str_res[len_a_m+len_b_m-1-i-1-1-1] != '0') {
+						           str_res[len_a_m+len_b_m-1-i-1-1-1] -= 1;
+							       str_res[len_a_m+len_b_m-1-i-1-1] = '9';
+							       str_res[len_a_m+len_b_m-1-i-1] = '9';
+							       str_res[len_a_m+len_b_m-1-i] = '0' + gap + 10;
+							   }
+						       else {
+						           if(str_res[len_a_m+len_b_m-1-i-1-1-1-1] != '0') {
+						               str_res[len_a_m+len_b_m-1-i-1-1-1-1] -= 1;
+							           str_res[len_a_m+len_b_m-1-i-1-1-1] = '9';
+							           str_res[len_a_m+len_b_m-1-i-1-1] = '9';
+							           str_res[len_a_m+len_b_m-1-i-1] = '9';
+							           str_res[len_a_m+len_b_m-1-i] = '0' + gap + 10;
+							       }
+								   else {
+								       assert(0); //这些步骤也是为了处理连续借位的情况
+								   }
+						       }
+						   }
+					   }
+				   }
+			   }
+		   }
+	   }
+	   printf("res:%s\n",str_res);
+
+       //printf("mod_str:%s\n", str_m); 
+       //printf("mod_val:%ld\n", m); 
 	   }
 	   }
        
