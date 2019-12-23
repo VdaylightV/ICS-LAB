@@ -109,7 +109,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 			   }
 		   }
 		   }
-	               printf("temp res:%s\n",temp_res);
+	       //        printf("temp res:%s\n",temp_res);
 		   
 		   
 		   for(int k = 0; k < len_a_m + len_b_m; k ++) {
