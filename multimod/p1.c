@@ -263,8 +263,8 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 		   temp /= 10;
 	   }
 
-
-       str_res = multi(str_a_m, len_a_m+1, str_b_m, len_b_m+1, str_res, len_a_m+len_b_m+1);
+       char* str_res_final;
+       str_res_final = multi(str_a_m, len_a_m+1, str_b_m, len_b_m+1, str_res, len_a_m+len_b_m+1);
 
        /*
 	   char str_m[len_a_m+len_b_m+1];
@@ -320,7 +320,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
        //printf("mod_val:%ld\n", m); 
 	   }
 	   */
-	   printf("res:%s\n",str_res);
+	   printf("res:%s\n",str_res_final);
 	   }
 	}
        
