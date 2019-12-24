@@ -237,17 +237,19 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	   char str_b_m[len_b_m+1];
 	   str_b_m[len_b_m] = '\0';
 	   char str_res[len_a_m + len_b_m+1];
-	   char temp_res[len_a_m+len_b_m+1];
+	   //char temp_res[len_a_m+len_b_m+1];
 	   
 	   for(int i = 0; i < len_a_m + len_b_m; i ++) {
 	       str_res[i] = '0';
 	   }
 	   str_res[len_a_m + len_b_m] = '\0';
 	   
+	   /*
 	   for(int i = 0; i < len_a_m + len_b_m; i ++) {
 	       temp_res[i] = '0';
 	   }
 	   temp_res[len_a_m + len_b_m] = '\0';
+       */
 
 	   temp = a_m;
 	   for(int i = 0; i < len_a_m; i ++) {
@@ -264,6 +266,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 
        str_res = multi(str_a_m, len_a_m+1, str_b_m, len_b_m+1, str_res, len_a_m+len_b_m+1);
 
+       /*
 	   char str_m[len_a_m+len_b_m+1];
 
 	   for(int i = 0; i < len_a_m + len_b_m; i ++) { //对应于上面一行的每一位
@@ -276,6 +279,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	       str_m[len_a_m + len_b_m - i - 1] = (temp % 10) + '0';
 		   temp /= 10;
 	   }
+	   */
        /*
 	   while(compare(str_res, len_a_m+len_b_m+1, str_m, len_a_m+len_b_m+1) >= 0) {
 	       if(compare(str_res, len_a_m+len_b_m+1, str_m, len_a_m+len_b_m+1) == 0) {
