@@ -237,7 +237,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 
 	struct timeval tv0;
 	gettimeofday(&tv0, NULL);
-	printf("%ds\t%ldms\n", tv0.tv_usec, tv0.tv_sec);
+	printf("%lds\t%ldms\n", tv0.tv_usec, tv0.tv_sec);
 
 
 	int64_t res = 0;
@@ -347,7 +347,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
   // TODO: implement
 	struct timeval tv1;
 	gettimeofday(&tv1, NULL);
-	printf("%ds\t%ldms\n", tv1.tv_usec, tv1.tv_sec);
+	printf("%lds\t%ldms\n", tv1.tv_usec, tv1.tv_sec);
   return res;
 }
 
