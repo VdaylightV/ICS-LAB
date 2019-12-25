@@ -215,8 +215,10 @@ static inline char* minuspro(char* res, char* m, int len) { // 默认res和m字�
 
    char* minus_factor = temp_m;
    while(compare(res, len, m, len) >= 0) {
+	   printf("-------OUTER:%s------\n",minus_factor);
        while(compare(res, len, minus_factor, len) == 1) {
 	       res = minus(res, minus_factor, len);
+		   printf("-------INNER:%s------\n",res); 
        } 
 	   minus_factor = back_bit(minus_factor, len);
    }
@@ -240,7 +242,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 		   printf("------------------\n");
 		   printf("a_m:%ld\n",a_m);
 		   printf("b_m:%ld\n",b_m);
-		   printf("mul:%ld\n",a_m*b_m);
+	//	   printf("mul:%ld\n",a_m*b_m);
 	       int len_a_m = 1;
 		   int len_b_m = 1;
 		   int64_t temp = a_m;
