@@ -208,6 +208,7 @@ static inline char* minuspro(char* res, char* m, int len) { // 默认res和m字�
        } 
 	   minus_factor = back_bit(minus_factor, len);
    }
+   return res;
 
 }
 
