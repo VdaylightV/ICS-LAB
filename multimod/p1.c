@@ -237,7 +237,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	       res = a_m * b_m % m;    
 	   }
 	   else {
-		   printf("------------------\n")
+		   printf("------------------\n");
 	       int len_a_m = 1;
 		   int len_b_m = 1;
 		   int64_t temp = a_m;
