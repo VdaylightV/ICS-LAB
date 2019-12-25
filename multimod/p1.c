@@ -238,6 +238,9 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	   }
 	   else {
 		   printf("------------------\n");
+		   printf("a%m:%d\n",a_m);
+		   printf("b%m:%d\n",b_m);
+		   printf("mul:%d\n",a_m*b_m);
 	       int len_a_m = 1;
 		   int len_b_m = 1;
 		   int64_t temp = a_m;
