@@ -4,19 +4,18 @@
 
 int64_t multimod_p2(int64_t a, int64_t b, int64_t m) {
 
-  int64_t multi_factor = b;
+  int64_t multi_factor = a;
   int64_t left = 0;
 
   struct timeval tv0;
   gettimeofday(&tv0, NULL);
 
-  while(a) {
-      if(a&1) {
-	      left += multi_factor;
+  while(b) {
+      if(b&1) {
+	      left = (left+multi_factor)%m;
 	  }
 	  multi_factor = (multi_factor + multi_factor) % m;
-	  left %= m;
-	  a >>= 1;
+	  b >>= 1;
   } 
   // TODO: implement
   
