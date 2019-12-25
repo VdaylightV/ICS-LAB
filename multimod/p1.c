@@ -126,12 +126,12 @@ static inline int compare(char a[], int len_a, char m[], int len_m) { // 实际�
 
    else {
        for(int i = bit_count_a; i < len_a-1; i ++) {
-	       if(a[bit_count_a] > m[bit_count_m]) {
+	       if(a[i] > m[i]) {
 	   printf(">\n");
 		       return 1;
 		   }
 
-	       else if(a[bit_count_a] < m[bit_count_m]) {
+	       else if(a[i] < m[i]) {
 	   printf("<\n");
 		       return -1;
 		   }
