@@ -215,7 +215,7 @@ static inline char* minuspro(char* res, char* m, int len) { // 默认res和m字�
 
    char* minus_factor = temp_m;
    while(compare(res, len, m, len) >= 0) {
-	   printf("-------OUTER:%s------\n",minus_factor);
+	   printf("******OUTER:%s******\n",minus_factor);
        while(compare(res, len, minus_factor, len) == 1) {
 	       res = minus(res, minus_factor, len);
 		   printf("-------INNER:%s------\n",res); 
