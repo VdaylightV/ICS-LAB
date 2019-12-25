@@ -13,9 +13,9 @@ int64_t multimod_p2(int64_t a, int64_t b, int64_t m) {
   while(a) {
       if(a&1) {
 	      left += multi_factor;
-		  left %= m;
 	  }
 	  multi_factor = (multi_factor + multi_factor) % m;
+	  left %= m;
 	  a >>= 1;
   } 
   // TODO: implement
