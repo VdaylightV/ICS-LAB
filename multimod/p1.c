@@ -347,7 +347,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
   // TODO: implement
 	struct timeval tv1;
 	gettimeofday(&tv1, NULL);
-	//printf("%lds\n", tv1.tv_usec-tv0.tv_usec);
+	printf("%lds\n", tv1.tv_usec-tv0.tv_usec);
   return res;
 }
 
