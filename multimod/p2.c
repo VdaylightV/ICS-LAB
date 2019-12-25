@@ -10,7 +10,7 @@ int64_t multimod_p2(int64_t a, int64_t b, int64_t m) {
   struct timeval tv0;
   gettimeofday(&tv0, NULL);
 
-  while(a > 0) {
+  while(a) {
       if((a&1) == 1) {
 	      left += multi_factor;
 		  left %= m;
