@@ -238,8 +238,8 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	   }
 	   else {
 		   printf("------------------\n");
-		   printf("a%m:%ld\n",a_m);
-		   printf("b%m:%ld\n",b_m);
+		   printf("a_m:%ld\n",a_m);
+		   printf("b_m:%ld\n",b_m);
 		   printf("mul:%ld\n",a_m*b_m);
 	       int len_a_m = 1;
 		   int len_b_m = 1;
@@ -288,7 +288,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 
        char* str_res_final;
        str_res_final = multi(str_a_m, len_a_m+1, str_b_m, len_b_m+1, str_res, len_a_m+len_b_m+1);
-	//   printf("res:%s\n",str_res_final);
+	   printf("res:%s\n",str_res_final);
 
        
 	   char str_m[len_a_m+len_b_m+1];
