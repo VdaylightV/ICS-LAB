@@ -115,23 +115,28 @@ static inline int compare(char a[], int len_a, char m[], int len_m) { // 实际�
    } 
 
    if(bit_count_a < bit_count_m) {
+	   printf(">\n");
        return 1; // 返回1表示a大
    }
 
    else if(bit_count_a > bit_count_m) {
+	   printf("<\n");
        return -1; // 返回-1表示b大
    }
 
    else {
        for(int i = bit_count_a; i < len_a-1; i ++) {
 	       if(a[bit_count_a] > m[bit_count_m]) {
+	   printf(">\n");
 		       return 1;
 		   }
 
 	       else if(a[bit_count_a] < m[bit_count_m]) {
+	   printf("<\n");
 		       return -1;
 		   }
 	   }
+	   printf("=\n");
 	   return 0;
    }
 }
