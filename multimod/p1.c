@@ -3,6 +3,18 @@
 #include "assert.h"
 #include "string.h"
 
+static inline int64_t str_to_int(char* str) {
+	int64_t result = 0;
+	int len = strlen(str);
+
+	for(int i = 0; i < len; i ++) {
+	    result *= 10;
+		result = result + str[i] - '0';	
+	}
+
+	return result;
+}
+
 static inline char* multi(char a[], int len_a, char b[], int len_b, char res[], int len_res) {   
 	   // len_a_m = len_a - 1; len_b_m = len_b - 1
 	   // len_a_m+len_b_m+1 = len_a+len_b-1
@@ -302,7 +314,8 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	   }
 	   */
 	  char* left = minuspro(str_res_final, str_m, len_a_m+len_b_m+1);
-	  printf("%s\n",left);
+	  //printf("%s\n",left);
+	  res = str_to_int(left);
 	   
 
        //printf("mod_str:%s\n", str_m); 
