@@ -235,12 +235,12 @@ static inline char* minuspro(char* res, char* m, int len) { // 默认res和m字�
 
 int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 
+	int64_t res = 0;
+
 	struct timeval tv0;
 	gettimeofday(&tv0, NULL);
 	//printf("%lds\t%ldms\n", tv0.tv_usec, tv0.tv_sec);
-
-
-	int64_t res = 0;
+	
 	if (m <= 2147483647) {
        res =  ((a%m) * (b%m)) % m; 
 	}
