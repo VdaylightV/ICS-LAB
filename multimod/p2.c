@@ -11,7 +11,7 @@ int64_t multimod_p2(int64_t a, int64_t b, int64_t m) {
   gettimeofday(&tv0, NULL);
 
   while(a) {
-      if((a&1) == 1) {
+      if(a&1) {
 	      left += multi_factor;
 		  left %= m;
 	  }
