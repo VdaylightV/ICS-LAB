@@ -1,4 +1,5 @@
 #include "multimod.h"
+#include "stdio.h"
 #include "sys/time.h"
 
 int64_t multimod_p2(int64_t a, int64_t b, int64_t m) {
