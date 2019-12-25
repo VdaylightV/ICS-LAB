@@ -1,6 +1,7 @@
 #include "multimod.h"
 #include "stdio.h"
 #include "assert.h"
+#include "string.h"
 
 static inline char* multi(char a[], int len_a, char b[], int len_b, char res[], int len_res) {   
 	   // len_a_m = len_a - 1; len_b_m = len_b - 1
@@ -90,7 +91,7 @@ static inline char* multi(char a[], int len_a, char b[], int len_b, char res[], 
     return res;
 }
 
-static inline int compare(char a[], int len_a, char m[], int len_m) {
+static inline int compare(char a[], int len_a, char m[], int len_m) { // 实际上默认len_a和len_m相等
    int bit_count_a = 0;
    while(a[bit_count_a] == '0') {
        bit_count_a ++;
@@ -102,11 +103,11 @@ static inline int compare(char a[], int len_a, char m[], int len_m) {
    } 
 
    if(bit_count_a < bit_count_m) {
-       return 1;
+       return 1; // 返回1表示a大
    }
 
    else if(bit_count_a > bit_count_m) {
-       return -1;
+       return -1; // 返回-1表示b大
    }
 
    else {
@@ -123,7 +124,7 @@ static inline int compare(char a[], int len_a, char m[], int len_m) {
    }
 }
 
-static inline char* minus(char res[], char m[], int len) { // 默认a>b才能减
+static inline char* minus(char* res, char* m, int len) { // 默认a>b才能减
     for(int i = 0; i < len-1; i ++) {
 		int bit_res = res[len-1-1-i];
 		int bit_m = m[len-1-1-i];
@@ -151,6 +152,63 @@ static inline char* minus(char res[], char m[], int len) { // 默认a>b才能减
        //printf("-----------temp res:%s-------------\n", res);
    }
    return res;
+}
+
+static inline char* back_bit(char* res, int len) {
+	char new[len];
+	for(int i = 0; i < len; i ++) {
+		new[i] = '0';
+	}
+	new[len-1] = '\0';
+
+	int index = 0;
+	while(res[index] == '0') {
+		index ++;
+	}
+
+	for(int i = 0; i < len-index - 1; i ++) {
+		new[index + 1 + i] = res[index+i];
+	}
+    new[len-1] = '\0';
+
+    for(int i = 0; i < len; i ++) {
+        res[i] = new[i];
+    }
+
+	return res;
+
+}
+
+static inline char* minuspro(char* res, char* m, int len) { // 默认res和m字符串的长度相等
+    int index_m = 0;
+	while(m[index_m] == '0') {
+        index_m ++;
+	}
+
+    int index_res = 0;
+	while(res[index_res] == '0') {
+        index_res ++;
+	}
+
+   char temp_m[len];
+   temp_m[len-1] = '\0';
+
+   for(int i = 0; i < len; i ++) {
+	   temp_m[i] = '0';
+   } 
+
+   for(int i = 0; i < len - index_m - 1; i ++) {
+       temp_m[index_res+i] = m[index_m+i];
+   }
+
+   char* minus_factor = temp_m;
+   while(compare(res, len, m, len) >= 0) {
+       while(compare(res, len, minus_factor, len) == 1) {
+	       res = minus(res, minus_factor, len);
+       } 
+	   minus_factor = back_bit(minus_factor, len);
+   }
+
 }
 
 int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
@@ -213,7 +271,7 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 
        char* str_res_final;
        str_res_final = multi(str_a_m, len_a_m+1, str_b_m, len_b_m+1, str_res, len_a_m+len_b_m+1);
-	   printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@res:%s\n",str_res_final);
+	   printf("res:%s\n",str_res_final);
 
        
 	   char str_m[len_a_m+len_b_m+1];
@@ -229,7 +287,8 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 		   temp /= 10;
 	   }
 
-       char* temp_res = str_res;   
+       //char* temp_res = str_res;   
+	   /*
 	   while(compare(str_res, len_a_m+len_b_m+1, str_m, len_a_m+len_b_m+1) >= 0) {
 	       if(compare(str_res, len_a_m+len_b_m+1, str_m, len_a_m+len_b_m+1) == 0) {
 		       res = 0;
@@ -237,9 +296,12 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 		  
 		   else {
 			   temp_res = minus(temp_res, str_m, len_a_m+len_b_m+1);			   
-	   printf("temp left:%s\n",temp_res);
+	   //printf("temp left:%s\n",temp_res);
 		       }
 	   }
+	   */
+	  char* left = minuspro(str_res_final, str_m, len_a_m+len_b_m+1);
+	  printf("--------THE RESULT:%s-----------\n",left);
 	   
 
        //printf("mod_str:%s\n", str_m); 
