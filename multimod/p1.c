@@ -2,6 +2,7 @@
 #include "stdio.h"
 #include "assert.h"
 #include "string.h"
+#include "sys/time.h"
 
 static inline int64_t str_to_int(char* str) {
 	int64_t result = 0;
@@ -233,6 +234,12 @@ static inline char* minuspro(char* res, char* m, int len) { // 默认res和m字�
 }
 
 int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
+
+	struct timeval tv0;
+	gettimeofday(&tv0, NULL);
+	printf("%ds\t%dms\n"m tv0.tv_usec, tv0.tv_sec);
+
+
 	int64_t res = 0;
 	if (m <= 2147483647) {
        res =  ((a%m) * (b%m)) % m; 
@@ -338,6 +345,9 @@ int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
 	}
        
   // TODO: implement
+	struct timeval tv1;
+	gettimeofday(&tv1, NULL);
+	printf("%ds\t%dms\n", tv1.tv_usec, tv1.tv_sec);
   return res;
 }
 
