@@ -2,7 +2,11 @@
 #include <string.h>
 
 int64_t asm_add(int64_t a, int64_t b) {
-  __asm__ __volatile__ ("addl %1 %0": "r="(b):"r"(a));
+  __asm__ __volatile__ (
+		  "addl %[b] %[a]"
+		  :[b]"=r"(b)
+		  :[a]"r"(a)
+  );
 
   // TODO: implement
   return b;
