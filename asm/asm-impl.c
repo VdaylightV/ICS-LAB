@@ -3,14 +3,14 @@
 
 int64_t asm_add(int64_t a, int64_t b) {
   asm(
-		  "add %[b] %[a]"
+		  "add %[b], %[a]"
 		  :[b]"=r"(b)
 		  :[a]"r"(a)
           :
   );
 
   // TODO: implement
-  return ;
+  return b;
 }
 
 int asm_popcnt(uint64_t n) {
