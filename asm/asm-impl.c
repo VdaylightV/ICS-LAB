@@ -2,8 +2,10 @@
 #include <string.h>
 
 int64_t asm_add(int64_t a, int64_t b) {
+  _asm_ _volatile_ ("addl %1 %0": "r"(a):"=r"(b));
+
   // TODO: implement
-  return 0;
+  return b;
 }
 
 int asm_popcnt(uint64_t n) {
