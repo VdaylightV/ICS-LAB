@@ -3,7 +3,7 @@
 
 int64_t asm_add(int64_t a, int64_t b) {
   asm(
-		  "addl %[b] %[a]"
+		  "add %[b] %[a]"
 		  :[b]"=r"(b)
 		  :[a]"r"(a)
           :
