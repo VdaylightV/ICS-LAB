@@ -2,7 +2,7 @@
 #include <string.h>
 
 int64_t asm_add(int64_t a, int64_t b) {
-  __asm__ __volatile__ (
+  __asm__(
 		  "addl %[b] %[a]"
 		  :[b]"=r"(b)
 		  :[a]"r"(a)
