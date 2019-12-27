@@ -1,3 +1,4 @@
+#include "stdio.h"
 #include "asm.h"
 #include <string.h>
 
@@ -8,6 +9,7 @@ int64_t asm_add(int64_t a, int64_t b) {
 		  :[a]"r"(a)
           :
   );
+  printf("%d\n",b);
 
   // TODO: implement
   return b;
