@@ -10,7 +10,7 @@ int64_t asm_add(int64_t a, int64_t b) {
   );
 
   // TODO: implement
-  return b;
+  return ;
 }
 
 int asm_popcnt(uint64_t n) {
