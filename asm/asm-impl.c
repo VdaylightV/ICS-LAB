@@ -6,6 +6,7 @@ int64_t asm_add(int64_t a, int64_t b) {
 		  "addl %[b] %[a]"
 		  :[b]"=r"(b)
 		  :[a]"r"(a)
+          :
   );
 
   // TODO: implement
