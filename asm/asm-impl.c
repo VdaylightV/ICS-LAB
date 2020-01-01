@@ -3,10 +3,12 @@
 #include <string.h>
 
 int64_t asm_add(int64_t a, int64_t b) {
+  int64_t m = a;
+  int64_t n = b;
   asm (
-		  "addq %[a], %[b]"
-		  :  "=r"(b)
-          : "a"(a), "b"(b)
+		  "addq %[m], %[n]"
+		  :  "=r"(n)
+          : "a"(m), "b"(n)
 		  : "%%eax", "%%ebx"
   );
 
