@@ -5,8 +5,8 @@
 int64_t asm_add(int64_t a, int64_t b) {
   asm (
 		  "addq %[a], %[b]"
-		  :[b] "=r"(b)
-          :"a"(a), "b"(b)
+		  :  "=r"(b)
+          : "a"(a), "b"(b)
 		  : "%eax", "%ebx"
   );
 
