@@ -11,8 +11,8 @@ int64_t asm_add(int64_t a, int64_t b) {
 		  "movq %1, %%eax"
 		  "addq %%eax, %0"
 		  : "=r"(n)
-          : "b"(m), "c"(n)
-		  : "%ebx", "%ecx"
+          : "r"(m), "r"(n)
+		  : "%eax"
   );
 
   printf("res:%ld\n",n);
