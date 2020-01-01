@@ -23,7 +23,15 @@ int64_t asm_add(int64_t a, int64_t b) {
 }
 
 int asm_popcnt(uint64_t n) {
+	asm (
+	       "movq %1, %%eax"
+		   "leaq (%1, %1, -1), %0"
+           : "=r"(n)
+           : "r"(n)
+           :"%eax"   
+	);
   // TODO: implement
+  printf("res:%ld\n",n);
   return 0;
 }
 
