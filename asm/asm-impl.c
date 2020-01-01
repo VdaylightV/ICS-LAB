@@ -26,7 +26,7 @@ int asm_popcnt(uint64_t n) {
 //	int s = 0;
 //	int i = 0;
 
-	asm ( "movl %1 %%eax" ::"a"(n): "%eax" );
+	asm ( "movl %1 %%eax" ::"r"(n): "%eax" );
   // TODO: implement
   
   return 0;
