@@ -5,7 +5,7 @@
 int64_t asm_add(int64_t a, int64_t b) {
   printf("Old a:%ld\n",a);
   printf("Old b:%ld\n",b);
-  asm volatile(
+  asm (
 		  "addq %[a], %[b]"
 		  :[b] "=r"(b)
           :"a"(a)
