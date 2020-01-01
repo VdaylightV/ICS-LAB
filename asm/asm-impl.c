@@ -5,20 +5,17 @@
 int64_t asm_add(int64_t a, int64_t b) {
   int64_t m = a;
   int64_t n = b;
-  int64_t res = 0;
   printf("m:%ld\n",m);
   printf("n:%ld\n",n);
   asm (
-		  "movq %2, %%ebx"
 		  "movq %1, %%eax"
 		  "addq %%eax, %0"
-		  "addq %%ebx, %0"
-		  :  "=r"(res)
-          : "r"(m), "r"(n)
-		  : "%eax"
+		  :  "=r"(n)
+          : "b"(m), "c"(n)
+		  : "%ebx", "%ecx"
   );
 
-  printf("res:%ld\n",res);
+  printf("res:%ld\n",n);
 
   // TODO: implement
   return b;
