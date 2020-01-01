@@ -23,14 +23,14 @@ int64_t asm_add(int64_t a, int64_t b) {
 }
 
 int asm_popcnt(uint64_t n) {
-	asm (
-		   "leaq (%1, %1, -1), %0"
-           : "=r"(n)
-           : "r"(n)
-           :"%eax"   
-	);
+	int s = 0;
+	int i = 0;
+
+	asm ( "movl %1 %%eax" ::"a"(n): "%eax" );
+	asm ( "movl %2 %%eax" ::"b"(s): "%ebx" );
+	asm ( "movl %3 %%eax" ::"c"(s): "%ecx" );
   // TODO: implement
-  printf("res:%ld\n",n);
+  
   return 0;
 }
 
