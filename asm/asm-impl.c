@@ -9,7 +9,7 @@ int64_t asm_add(int64_t a, int64_t b) {
   printf("n:%ld\n",n);
   asm (
 		  "movq %1 %%eax;
-		   addp %%eax %0 "
+		   addq %%eax %0"
 		  :  "+r"(n)
           : "a"(m), "b"(n)
 		  : "%eax", "%ebx"
