@@ -6,7 +6,7 @@ int64_t asm_add(int64_t a, int64_t b) {
   int64_t m = a;
   int64_t n = b;
   asm (
-		  "addq %[m], %[n]"
+		  "addq %1, %0"
 		  :  "=r"(n)
           : "a"(m), "b"(n)
 		  : "%%eax", "%%ebx"
