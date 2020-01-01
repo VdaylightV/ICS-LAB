@@ -16,7 +16,7 @@ int64_t asm_add(int64_t a, int64_t b) {
 		  : 
   );
 
-  printf("res:%ld\n",b);
+//  printf("res:%ld\n",b);
 
   // TODO: implement
   return b;
