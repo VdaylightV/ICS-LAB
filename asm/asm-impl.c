@@ -23,8 +23,8 @@ int64_t asm_add(int64_t a, int64_t b) {
 }
 
 int asm_popcnt(uint64_t n) {
-	int s = 0;
-	int i = 0;
+//	int s = 0;
+//	int i = 0;
 
 	asm ( "movl %1 %%eax" ::"a"(n): "%eax" );
   // TODO: implement
