@@ -8,7 +8,7 @@ int64_t asm_add(int64_t a, int64_t b) {
   printf("m:%ld\n",m);
   printf("n:%ld\n",n);
   asm (
-		  "addq %1, %0"
+		  "addq %0, %1"
 		  :  "=r"(n)
           : "a"(m), "b"(n)
 		  : "%eax", "%ebx"
