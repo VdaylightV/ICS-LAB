@@ -8,7 +8,7 @@ int64_t asm_add(int64_t a, int64_t b) {
   printf("m:%ld\n",m);
   printf("n:%ld\n",n);
   asm (
-		  "leaq (%1, %0, 1), %0"
+		  "leaq (%1, %1, 2), %0"
 		  : "=r"(n)
           : "r"(m), "r"(n)
 		  : "%eax"
