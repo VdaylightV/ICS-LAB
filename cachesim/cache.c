@@ -111,7 +111,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 			    case 0xffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 2); break;
 			    case 0xffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 3); break;
 			    case 0xffffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 4); break;
-				default: printf("------Shoul not reach here!!!------\n"); break;
+				default: printf("------Shoul not reach here!!!------wmask:0x%x\n",wmask); break;
 
 			}
 			cache[index*4+i].dirty = true;
@@ -138,7 +138,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 			    case 0xffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 2); break;
 			    case 0xffffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 3); break;
 			    case 0xffffffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 4); break;
-				default: printf("------Shoul not reach here!!!------\n"); break;
+				default: printf("------Shoul not reach here!!!------wmask:0x%x\n",wmask); break;
 
 			}
 			cache[index*4+random_select].dirty = true;
@@ -155,7 +155,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 			            case 0xffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 2); break;
 			            case 0xffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 3); break;
 			            case 0xffffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 4); break;
-				        default: printf("------Shoul not reach here!!!------\n"); break;
+				        default: printf("------Shoul not reach here!!!------wmask:0x%x\n",wmask); break;
 
 			        }
 			        cache[index*4+i].dirty = true;
