@@ -8,7 +8,7 @@ struct cache_unit {
     uint8_t block[BLOCK_SIZE];
 }
 
-cache_unite cache[256];
+cache_unit cache[256];
 
 // 从块号为‘block_num’的内存地址中读出一整个cache块大小的内容到‘buf’中
 void mem_read(uintptr_t block_num, uint8_t *buf);
