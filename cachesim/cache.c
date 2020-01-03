@@ -50,7 +50,7 @@ uint32_t cache_read(uintptr_t addr) {
 		if(full = true) {
 		    uint8_t random_select = rand() % 4; //满了随机选择一个替换
 			if(cache[index*4+random_select].dirty == true) {
-				printf("--------Please implement write back!!!--------")
+				printf("--------Please implement write back!!!--------");
 			    assert(0)
 				//回写
 			}
@@ -93,7 +93,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 // 例如’init_cache(14, 2)'将初始化一个16KB，4路组相联的cache
 // 将所有的valid bit置为无效即可
 void init_cache(int total_size_width, int associativity_width) {
-	int size = (exp2(total_size_width) / BLOCK_SIZE);
+	//int size = (exp2(total_size_width) / BLOCK_SIZE);
 
 	for(int i = 0; i < 256; i++) {
 	    cache[i].valid = false;
