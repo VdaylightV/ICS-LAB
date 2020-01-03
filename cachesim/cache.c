@@ -6,7 +6,7 @@ struct cache_unit {
 	bool dirty;
 	uint8_t tag;
     uint8_t block[BLOCK_SIZE];
-}
+};
 
 cache_unit cache[256];
 
