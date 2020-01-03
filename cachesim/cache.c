@@ -47,7 +47,7 @@ uint32_t cache_read(uintptr_t addr) {
     
 	if(hit == false) { //未命中，访问内存
 		full = cache[index*4].valid && cache[index*4+1].valid && cache[index*4+2].valid && cache[index*4+3].valid; //先检查对应的cache组是否满了
-		if(full = true) {
+		if(full == true) {
 		    uint8_t random_select = rand() % 4; //满了随机选择一个替换
 			if(cache[index*4+random_select].dirty == true) {
 				printf("--------Please implement write back!!!--------");
