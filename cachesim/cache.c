@@ -57,6 +57,7 @@ uint32_t cache_read(uintptr_t addr) {
 				mem_write(old_mem_block_NO, &(cache[index*4+random_select].block[0])); //回写
 			}
 		    mem_read(mem_block_NO, &(cache[index*4+random_select].block[0]));
+			cache[index*4+random_select].tag = tag;
 			cache[index*4+random_select].valid = true;
 			cache[index*4+random_select].dirty = false; //完成从内存读取替换
 
@@ -70,6 +71,7 @@ uint32_t cache_read(uintptr_t addr) {
 		        if(cache[index*4+i].valid == false) {
 			        mem_read(mem_block_NO, &(cache[index*4+i].block[0]));
 				    cache[index*4+i].valid = true;
+			        cache[index*4+i].tag = tag;
 			        for(int j = 4; j > 0; j --) {
 			            result += (cache[index*4+i].block[block_inside_offset+j] << (j-1)*8);
 			        }
