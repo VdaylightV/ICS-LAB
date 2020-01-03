@@ -89,7 +89,6 @@ uint32_t cache_read(uintptr_t addr) {
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 	
 	bool hit = false; //用于判断是否命中
-	uint32_t result = 0; //用于存放返回结果
 	bool full = false; //用于判断对应的组(set)内是否已满
 	uint16_t mem_block_NO = 0; //用于记录主存块号
 
