@@ -84,6 +84,7 @@ uint32_t cache_read(uintptr_t addr) {
 	
 	}
 
+	return -1;
 }
 
 // 往cache中‘addr’地址所属的块写入数据‘data’，写掩码为‘wmask’
