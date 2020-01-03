@@ -43,7 +43,7 @@ uint32_t cache_read(uintptr_t addr) {
 			for(int j = 4; j > 0; j --) {
 			    result += (cache[index*4+i].block[block_inside_offset+j-1] << (j-1)*8);
 			}
-            break;
+            return result;
 		}
 	}
     
@@ -64,6 +64,7 @@ uint32_t cache_read(uintptr_t addr) {
 			for(int j = 4; j > 0; j --) {
 			    result += (cache[index*4+random_select].block[block_inside_offset+j-1] << (j-1)*8);
 			}
+			return result;
 
 		}
 		else {
@@ -75,7 +76,7 @@ uint32_t cache_read(uintptr_t addr) {
 			        for(int j = 4; j > 0; j --) {
 			            result += (cache[index*4+i].block[block_inside_offset+j-1] << (j-1)*8);
 			        }
-				    break;
+                    return result;
 			    }
 		    }
 		}
@@ -83,7 +84,6 @@ uint32_t cache_read(uintptr_t addr) {
 	
 	}
 
-  return result;
 }
 
 // 往cache中‘addr’地址所属的块写入数据‘data’，写掩码为‘wmask’
