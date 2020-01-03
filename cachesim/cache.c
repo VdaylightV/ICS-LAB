@@ -41,7 +41,8 @@ uint32_t cache_read(uintptr_t addr) {
 	mem_block_NO = ((mem_block_NO + tag) << 6)+index;
 
     for(int i = 0; i < 4; i ++) {
-	    if(cache[index*4+i].tag == tag &&  cache[index*4+i].valid == true) {
+	    if(cache[index*4+i].tag == tag && cache[index*4+i].valid == true) {
+			printf("----HIT----\n");
 		    hit = true;
 			for(int j = 0; j < 4; j ++) {
 			    result += (cache[index*4+i].block[block_inside_offset+j] << (3-j)*8);
@@ -130,6 +131,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 	}
 
     for(int i = 0; i < 4; i ++) {
+		printf("----HIT----\n");
 	    if(cache[index*4+i].tag == tag &&  cache[index*4+i].valid == true) {
 		    hit = true;
 		    switch(wmask) {
