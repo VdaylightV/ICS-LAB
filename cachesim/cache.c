@@ -152,14 +152,14 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 				    cache[index*4+i].valid = true;
 		            switch(wmask) {
 			            case 0x0: assert(0); break;
-			            case 0xff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 1); break;
-			            case 0xffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 2); break;
-			            case 0xffffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 3); break;
-			            case 0xffffffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 4); break;
+			            case 0xff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 1); break;
+			            case 0xffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 2); break;
+			            case 0xffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 3); break;
+			            case 0xffffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 4); break;
 				        default: printf("------Shoul not reach here!!!------\n"); break;
 
 			        }
-			        cache[index*4+random_select].dirty = true;
+			        cache[index*4+i].dirty = true;
 				    return;
 			    }
 		    }
