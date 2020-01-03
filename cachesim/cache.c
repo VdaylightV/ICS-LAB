@@ -86,6 +86,7 @@ uint32_t cache_read(uintptr_t addr) {
 // 例如当‘wmask’为‘0xff’时，只写入低8比特
 // 若缺失，需先从内存中读入数据
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
+	/*
 	bool hit = false; //用于判断是否命中
 	uint32_t result = 0; //用于存放返回结果
 	bool full = false; //用于判断对应的组(set)内是否已满
@@ -107,7 +108,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
             break;
 		}
 	}
-    
+*/
 
 }
 
