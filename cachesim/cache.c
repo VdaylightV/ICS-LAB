@@ -35,7 +35,7 @@ uint32_t cache_read(uintptr_t addr) {
 	uint8_t block_inside_offset = (addr & 0x3f); //用于记录块内偏移量
 	uint8_t index = ((addr >> 6) & 0x3f); //用于cache组号
 	uint8_t tag = ((addr >> 12) & 0xff); //用于记录块群号
-	mem_block_NO = ((mem_block_NO + tag) << 8)+index;
+	mem_block_NO = ((mem_block_NO + tag) << 6)+index;
 
     for(int i = 0; i < 4; i ++) {
 	    if(cache[index*4+i].tag == tag &&  cache[index*4+i].valid == true) {
@@ -53,7 +53,7 @@ uint32_t cache_read(uintptr_t addr) {
 		    uint8_t random_select = rand() % 4; //满了随机选择一个替换
 			if(cache[index*4+random_select].dirty == true) {
 				uint16_t old_mem_block_NO = 0;
-				old_mem_block_NO = ((old_mem_block_NO + cache[index*4+random_select].tag) << 8)+index; //计算将要被替换的一块所对应的主存块号
+				old_mem_block_NO = ((old_mem_block_NO + cache[index*4+random_select].tag) << 6)+index; //计算将要被替换的一块所对应的主存块号
 				mem_write(old_mem_block_NO, &(cache[index*4+random_select].block[0])); //回写
 			}
 		    mem_read(mem_block_NO, &(cache[index*4+random_select].block[0]));
@@ -100,7 +100,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 	uint8_t block_inside_offset = (addr & 0x3f); //用于记录块内偏移量
 	uint8_t index = ((addr >> 6) & 0x3f); //用于cache组号
 	uint8_t tag = ((addr >> 12) & 0xff); //用于记录块群号
-	mem_block_NO = ((mem_block_NO + tag) << 8)+index;
+	mem_block_NO = ((mem_block_NO + tag) << 6)+index;
 
 	uint8_t data_set[4];
 	for(int i = 0; i < 4; i ++) {
@@ -135,7 +135,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 		    uint8_t random_select = rand() % 4; //满了随机选择一个替换
 			if(cache[index*4+random_select].dirty == true) {
 				uint16_t old_mem_block_NO = 0;
-				old_mem_block_NO = ((old_mem_block_NO + cache[index*4+random_select].tag) << 8)+index; //计算将要被替换的一块所对应的主存块号
+				old_mem_block_NO = ((old_mem_block_NO + cache[index*4+random_select].tag) << 6)+index; //计算将要被替换的一块所对应的主存块号
 				mem_write(old_mem_block_NO, &(cache[index*4+random_select].block[0])); //回写
 			}
 		    mem_read(mem_block_NO, &(cache[index*4+random_select].block[0]));
