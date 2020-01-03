@@ -41,7 +41,7 @@ uint32_t cache_read(uintptr_t addr) {
 	    if(cache[index*4+i].tag == tag &&  cache[index*4+i].valid == true) {
 		    hit = true;
 			for(int j = 4; j > 0; j --) {
-			    result += (cache[index*4+i].block[block_inside_offset+j] << (j-1)*8);
+			    result += (cache[index*4+i].block[block_inside_offset+j-1] << (j-1)*8);
 			}
             break;
 		}
@@ -62,7 +62,7 @@ uint32_t cache_read(uintptr_t addr) {
 			cache[index*4+random_select].dirty = false; //完成从内存读取替换
 
 			for(int j = 4; j > 0; j --) {
-			    result += (cache[index*4+random_select].block[block_inside_offset+j] << (j-1)*8);
+			    result += (cache[index*4+random_select].block[block_inside_offset+j-1] << (j-1)*8);
 			}
 
 		}
@@ -73,7 +73,7 @@ uint32_t cache_read(uintptr_t addr) {
 				    cache[index*4+i].valid = true;
 			        cache[index*4+i].tag = tag;
 			        for(int j = 4; j > 0; j --) {
-			            result += (cache[index*4+i].block[block_inside_offset+j] << (j-1)*8);
+			            result += (cache[index*4+i].block[block_inside_offset+j-1] << (j-1)*8);
 			        }
 				    break;
 			    }
