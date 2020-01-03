@@ -33,8 +33,11 @@ uint32_t cache_read(uintptr_t addr) {
 	uint16_t mem_block_NO = 0; //用于记录主存块号
 
 	uint8_t block_inside_offset = ((addr & 0x3f) & ~0x3); //用于记录块内偏移量
+	printf("----READ-----||block_inside_offset:0x%x\n",(uint32_t)block_inside_offset);
 	uint8_t index = ((addr >> 6) & 0x3f); //用于cache组号
+	printf("----READ-----||index:0x%x\n",(uint32_t)index);
 	uint8_t tag = ((addr >> 12) & 0xff); //用于记录块群号
+	printf("----READ-----||tag:0x%x\n",(uint32_t)tag);
 	mem_block_NO = ((mem_block_NO + tag) << 6)+index;
 
     for(int i = 0; i < 4; i ++) {
@@ -114,8 +117,11 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 	uint16_t mem_block_NO = 0; //用于记录主存块号
 
 	uint8_t block_inside_offset = ((addr & 0x3f) & ~0x3); //用于记录块内偏移量
+	printf("----READ-----||block_inside_offset:0x%x\n",(uint32_t)block_inside_offset);
 	uint8_t index = ((addr >> 6) & 0x3f); //用于cache组号
+	printf("----READ-----||index:0x%x\n",(uint32_t)index);
 	uint8_t tag = ((addr >> 12) & 0xff); //用于记录块群号
+	printf("----READ-----||tag:0x%x\n",(uint32_t)tag);
 	mem_block_NO = ((mem_block_NO + tag) << 6)+index;
 
 	uint8_t data_set[4];
