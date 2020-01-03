@@ -55,7 +55,7 @@ static void random_trace(void) {
   int i;
   for (i = 0; i < 1000000; i ++) {
     t.t.len = choose_len[ choose(sizeof(choose_len) / sizeof(choose_len[0])) ] ;
-    t.t.addr = choose(MEM_SIZE) & ~(t.t.len - 1);
+    t.t.addr = choose(MEM_SIZE) & ~(t.t.len - 1);//对于不同的长度，块内地址所需的位数会被限制，例如len为2，只需要看块内地址前三位，len为4，只需要看块内地址前两位
     t.t.is_write = choose(2);
     if (t.t.is_write) t.data = rand();
 
