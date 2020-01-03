@@ -38,8 +38,8 @@ uint32_t cache_read(uintptr_t addr) {
     for(int i = 0; i < 4; i ++) {
 	    if(cache[index*4+i].tag == tag &&  cache[index*4+i].valid == true) {
 		    hit = true;
-			for(int j = 0; j < 4; j ++) {
-			    result += (cache[index*4+i].block[block_inside_offset+j] << j*4);
+			for(int j = 4; j > 0; j --) {
+			    result += (cache[index*4+i].block[block_inside_offset+j] << (j-1)*8);
 			}
             break;
 		}
@@ -58,8 +58,8 @@ uint32_t cache_read(uintptr_t addr) {
 			cache[index*4+random_select].valid = true;
 			cache[index*4+random_select].dirty = false; //完成从内存读取替换
 
-			for(int j = 0; j < 4; j ++) {
-			    result += (cache[index*4+random_select].block[block_inside_offset+j] << j*4);
+			for(int j = 4; j > 0; j --) {
+			    result += (cache[index*4+random_select].block[block_inside_offset+j] << (j-1)*8);
 			}
 
 		}
@@ -68,8 +68,8 @@ uint32_t cache_read(uintptr_t addr) {
 		        if(cache[index*4+i].valid == false) {
 			        mem_read(mem_block_NO, &(cache[index*4+i].block[0]));
 				    cache[index*4+i].valid = true;
-			        for(int j = 0; j < 4; j ++) {
-			            result += (cache[index*4+i].block[block_inside_offset+j] << j*4);
+			        for(int j = 4; j > 0; j --) {
+			            result += (cache[index*4+i].block[block_inside_offset+j] << (j-1)*8);
 			        }
 				    break;
 			    }
@@ -86,6 +86,28 @@ uint32_t cache_read(uintptr_t addr) {
 // 例如当‘wmask’为‘0xff’时，只写入低8比特
 // 若缺失，需先从内存中读入数据
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
+	bool hit = false; //用于判断是否命中
+	uint32_t result = 0; //用于存放返回结果
+	bool full = false; //用于判断对应的组(set)内是否已满
+	uint16_t mem_block_NO = 0; //用于记录主存块号
+
+	uint8_t block_inside_offset = (addr & 0x3f); //用于记录块内偏移量
+	uint8_t index = ((addr >> 6) & 0x3f); //用于cache组号
+	uint8_t tag = ((addr >> 12) & 0xff); //用于记录块群号
+	mem_block_NO = ((mem_block_NO + tag) << 8)+index;
+
+    for(int i = 0; i < 4; i ++) {
+	    if(cache[index*4+i].tag == tag &&  cache[index*4+i].valid == true) {
+		    hit = true;
+            
+
+			for(int j = 0; j < 4; j ++) {
+			    result += (cache[index*4+i].block[block_inside_offset+j] << j*4);
+			}
+            break;
+		}
+	}
+    
 
 }
 
