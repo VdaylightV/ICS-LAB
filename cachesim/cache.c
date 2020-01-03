@@ -50,9 +50,9 @@ uint32_t cache_read(uintptr_t addr) {
 		if(full == true) {
 		    uint8_t random_select = rand() % 4; //满了随机选择一个替换
 			if(cache[index*4+random_select].dirty == true) {
-				printf("--------Please implement write back!!!--------");
-			    assert(0);
-				//回写
+				uint16_t old_mem_block_NO = 0;
+				old_mem_block_NO = ((old_mem_block_NO + cache[index*4+random_select].tag) << 8)+index; //计算将要被替换的一块所对应的主存块号
+				mem_write(old_mem_block_NO, &(cache[index*4+random_select].block[0])); //回写
 			}
 		    mem_read(mem_block_NO, &(cache[index*4+random_select].block[0]));
 			cache[index*4+random_select].valid = true;
