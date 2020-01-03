@@ -86,7 +86,7 @@ uint32_t cache_read(uintptr_t addr) {
 // 例如当‘wmask’为‘0xff’时，只写入低8比特
 // 若缺失，需先从内存中读入数据
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
-	/*
+	
 	bool hit = false; //用于判断是否命中
 	uint32_t result = 0; //用于存放返回结果
 	bool full = false; //用于判断对应的组(set)内是否已满
@@ -97,18 +97,77 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 	uint8_t tag = ((addr >> 12) & 0xff); //用于记录块群号
 	mem_block_NO = ((mem_block_NO + tag) << 8)+index;
 
+	uint8_t data_set[4];
+	for(int i = 0; i < 4; i ++) {
+	   data_set[i] = ((data >> 8*i) & 0xff);
+	}
+
     for(int i = 0; i < 4; i ++) {
 	    if(cache[index*4+i].tag == tag &&  cache[index*4+i].valid == true) {
 		    hit = true;
-            
+		    switch(wmask) {
+			    case 0x0: assert(0); break;
+			    case 0xff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 1); break;
+			    case 0xffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 2); break;
+			    case 0xffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 3); break;
+			    case 0xffffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 4); break;
+				default: printf("------Shoul not reach here!!!------\n"); break;
 
-			for(int j = 0; j < 4; j ++) {
-			    result += (cache[index*4+i].block[block_inside_offset+j] << j*4);
 			}
-            break;
+			cache[index*4+i].dirty = true;
+            return;
 		}
 	}
-*/
+
+	if(hit == false) { //未命中，访问内存
+		full = cache[index*4].valid && cache[index*4+1].valid && cache[index*4+2].valid && cache[index*4+3].valid; //先检查对应的cache组是否满了
+		if(full == true) {
+		    uint8_t random_select = rand() % 4; //满了随机选择一个替换
+			if(cache[index*4+random_select].dirty == true) {
+				uint16_t old_mem_block_NO = 0;
+				old_mem_block_NO = ((old_mem_block_NO + cache[index*4+random_select].tag) << 8)+index; //计算将要被替换的一块所对应的主存块号
+				mem_write(old_mem_block_NO, &(cache[index*4+random_select].block[0])); //回写
+			}
+		    mem_read(mem_block_NO, &(cache[index*4+random_select].block[0]));
+			cache[index*4+random_select].valid = true;
+			cache[index*4+random_select].dirty = false; //完成从内存读取替换
+
+		    switch(wmask) {
+			    case 0x0: assert(0); break;
+			    case 0xff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 1); break;
+			    case 0xffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 2); break;
+			    case 0xffffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 3); break;
+			    case 0xffffffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 4); break;
+				default: printf("------Shoul not reach here!!!------\n"); break;
+
+			}
+			cache[index*4+random_select].dirty = true;
+            return;
+		}
+		else {
+		    for(int i = 0; i < 4; i ++) {
+		        if(cache[index*4+i].valid == false) {
+			        mem_read(mem_block_NO, &(cache[index*4+i].block[0]));
+				    cache[index*4+i].valid = true;
+		            switch(wmask) {
+			            case 0x0: assert(0); break;
+			            case 0xff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 1); break;
+			            case 0xffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 2); break;
+			            case 0xffffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 3); break;
+			            case 0xffffffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 4); break;
+				        default: printf("------Shoul not reach here!!!------\n"); break;
+
+			        }
+			        cache[index*4+random_select].dirty = true;
+				    return;
+			    }
+		    }
+		}
+
+	
+	}
+	
+
 
 }
 
