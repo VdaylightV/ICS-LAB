@@ -109,11 +109,16 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 		    switch(wmask) {
 			    case 0x0: assert(0); break;
 			    case 0xff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 1); break;
+			    case 0xff00: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[1], 1); break;
+			    case 0xff0000: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[2], 1); break;
+			    case 0xff000000: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[3], 1); break;
 			    case 0xffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 2); break;
+			    case 0xffff00: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[1], 2); break;
+			    case 0xffff0000: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[2], 2); break;
 			    case 0xffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 3); break;
+			    case 0xffffff00: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[1], 3); break;
 			    case 0xffffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 4); break;
 				default: printf("------Shoul not reach here!!!------wmask:0x%x\n",wmask); break;
-
 			}
 			cache[index*4+i].dirty = true;
             return;
@@ -146,7 +151,6 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 			    case 0xffffff00: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[1], 3); break;
 			    case 0xffffffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 4); break;
 				default: printf("------Shoul not reach here!!!------wmask:0x%x\n",wmask); break;
-
 			}
 			cache[index*4+random_select].dirty = true;
             return;
@@ -159,12 +163,17 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 		            switch(wmask) {
 			            case 0x0: assert(0); break;
 			            case 0xff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 1); break;
-			            case 0xffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 2); break;
-			            case 0xffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 3); break;
-			            case 0xffffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 4); break;
-				        default: printf("------Shoul not reach here!!!------wmask:0x%x\n",wmask); break;
-
-			        }
+			            case 0xff00: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[1], 1); break;
+			            case 0xff0000: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[2], 1); break;
+						case 0xff000000: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[3], 1); break;
+						case 0xffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 2); break;
+					    case 0xffff00: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[1], 2); break;
+						case 0xffff0000: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[2], 2); break;
+						case 0xffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 3); break;
+						case 0xffffff00: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[1], 3); break;
+						case 0xffffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 4); break;
+						default: printf("------Shoul not reach here!!!------wmask:0x%x\n",wmask); break;
+					}
 			        cache[index*4+i].dirty = true;
 				    return;
 			    }
