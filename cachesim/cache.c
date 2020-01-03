@@ -40,9 +40,14 @@ uint32_t cache_read(uintptr_t addr) {
     for(int i = 0; i < 4; i ++) {
 	    if(cache[index*4+i].tag == tag &&  cache[index*4+i].valid == true) {
 		    hit = true;
+			for(int j = 0; j < 4; j ++) {
+			    result += (cache[index*4+i].block[block_inside_offset+j] << (3-j)*8);
+			}
+			/*
 			for(int j = 4; j > 0; j --) {
 			    result += (cache[index*4+i].block[block_inside_offset+j-1] << (j-1)*8);
 			}
+			*/
             return result;
 		}
 	}
@@ -61,9 +66,14 @@ uint32_t cache_read(uintptr_t addr) {
 			cache[index*4+random_select].valid = true;
 			cache[index*4+random_select].dirty = false; //完成从内存读取替换
 
+			for(int j = 0; j < 4; j ++) {
+			    result += (cache[index*4+random_select].block[block_inside_offset+j] << (3-j)*8);
+			}
+			/*
 			for(int j = 4; j > 0; j --) {
 			    result += (cache[index*4+random_select].block[block_inside_offset+j-1] << (j-1)*8);
 			}
+			*/
 			return result;
 
 		}
@@ -73,9 +83,14 @@ uint32_t cache_read(uintptr_t addr) {
 			        mem_read(mem_block_NO, &(cache[index*4+i].block[0]));
 				    cache[index*4+i].valid = true;
 			        cache[index*4+i].tag = tag;
-			        for(int j = 4; j > 0; j --) {
-			            result += (cache[index*4+i].block[block_inside_offset+j-1] << (j-1)*8);
-			        }
+					for(int j = 0; j < 4; j ++) {
+						result += (cache[index*4+i].block[block_inside_offset+j] << (3-j)*8);
+					}
+					/*
+					for(int j = 4; j > 0; j --) {
+						result += (cache[index*4+i].block[block_inside_offset+j-1] << (j-1)*8);
+					}
+					*/
                     return result;
 			    }
 		    }
