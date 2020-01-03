@@ -131,8 +131,8 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 	}
 
     for(int i = 0; i < 4; i ++) {
-		printf("----HIT----\n");
 	    if(cache[index*4+i].tag == tag &&  cache[index*4+i].valid == true) {
+		    printf("----HIT----\n");
 		    hit = true;
 		    switch(wmask) {
 			    case 0x0: assert(0); break;
