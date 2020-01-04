@@ -2,6 +2,7 @@
 #include <time.h>
 #include <unistd.h>
 
+extern static uint8_t mem[MEM_SIZE];
 uint32_t cpu_read(uintptr_t addr, int len);
 void cpu_write(uintptr_t addr, int len, uint32_t data);
 uint32_t cpu_uncache_read(uintptr_t addr, int len);
