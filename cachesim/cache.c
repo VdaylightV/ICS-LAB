@@ -42,7 +42,7 @@ uint32_t cache_read(uintptr_t addr) {
 
     for(int i = 0; i < 4; i ++) {
 	    if(cache[index*4+i].tag == tag && cache[index*4+i].valid == true) {
-			printf("----HIT----\n");
+			printf("!!!!!!!!HIT!!!!!!!!\n");
 		    hit = true;
 			/*
 			for(int j = 0; j < 4; j ++) {
@@ -137,7 +137,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 
     for(int i = 0; i < 4; i ++) {
 	    if(cache[index*4+i].tag == tag &&  cache[index*4+i].valid == true) {
-		    printf("----HIT----\n");
+		    printf("!!!!!!!!HIT!!!!!!!!\n");
 		    hit = true;
 		    switch(wmask) {
 			    case 0x0: assert(0); break;
