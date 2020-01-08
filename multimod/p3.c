@@ -11,7 +11,7 @@ int64_t multimod_p3(int64_t a, int64_t b, int64_t m) {
 	struct timeval tv1;
 	gettimeofday(&tv1, NULL);
 	
-    printf("%ldms\n",tv1.tv_sec-tv0.tv_sec);
+    printf("%ldms\n",tv1.tv_usec-tv0.tv_usec);
 
   return t;
 }
