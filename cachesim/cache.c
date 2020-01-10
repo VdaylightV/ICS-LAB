@@ -301,10 +301,10 @@ void init_cache(int total_size_width, int associativity_width) {
 
 void display_statistic(void) {
 
-	printf("-----Total cache count:%ld\n", total_cache_count);
-	printf("-----Total cache time:%ld\n", total_cache_time);
-	printf("-----Total mem count:%ld\n", total_mem_count);
-	printf("-----Total mem time:%ld\n", total_mem_time);
+	printf("-----Total cache count:%lu\n", total_cache_count);
+	printf("-----Total cache time:%lu\n", total_cache_time);
+	printf("-----Total mem count:%lu\n", total_mem_count);
+	printf("-----Total mem time:%lu\n", total_mem_time);
 
 	/*
 	for(int i = 0; i < 256; i ++) {
