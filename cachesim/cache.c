@@ -237,7 +237,7 @@ void display_statistic(void) {
 		if(cache[i].valid == true) {
 	        printf("-----SLOT:%d-----TAG:%d", i, cache[i].tag);
 		    for(int j = 0; j < 64; j ++) {
-			    if(j%12 == 0) {
+			    if(j%11 == 0) {
 			        printf("\n");
 			    }
 			    printf("| INDEX:%d  0x%x |  ", j, cache[i].block[j]);
