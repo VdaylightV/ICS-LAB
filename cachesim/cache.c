@@ -170,6 +170,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 			}
 		    mem_read(mem_block_NO, &(cache[index*4+random_select].block[0]));
 			cache[index*4+random_select].valid = true;
+			cache[index*4+random_select].tag = tag;
 			cache[index*4+random_select].dirty = false; //完成从内存读取替换
 
 		    switch(wmask) {
@@ -194,6 +195,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 		        if(cache[index*4+i].valid == false) {
 			        mem_read(mem_block_NO, &(cache[index*4+i].block[0]));
 				    cache[index*4+i].valid = true;
+				    cache[index*4+i].tag = tag;
 		            switch(wmask) {
 			            case 0x0: assert(0); break;
 			            case 0xff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 1); break;
