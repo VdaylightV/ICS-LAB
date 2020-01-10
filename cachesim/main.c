@@ -142,7 +142,7 @@ int main(int argc, char *argv[]) {
 
   replay_trace();
 
-  display_statistic();
+  //display_statistic();
 
   return 0;
 }
