@@ -523,7 +523,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 void init_cache(int total_size_width, int associativity_width) {
 	//int size = (exp2(total_size_width) / BLOCK_SIZE);
 
-	for(int i = 0; i < 256; i++) {
+	for(int i = 0; i < 4; i++) {
 	    cache[i].valid = false;
 	}
 }
