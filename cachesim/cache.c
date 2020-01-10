@@ -129,11 +129,11 @@ uint32_t cache_read(uintptr_t addr) {
 						result += (cache[index*4+i].block[block_inside_offset+j-1] << (j-1)*8);
 					}
 					
-			        struct timeval tv2;
-			        gettimeofday(&tv2, NULL);
+			        struct timeval tv1;
+			        gettimeofday(&tv1, NULL);
 
 			        total_mem_count ++;
-			        total_mem_time += (tv2.tv_sec*1000+tv2.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
+			        total_mem_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
 			
                     return result;
 			    }
@@ -240,11 +240,11 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 			}
 			cache[index*4+random_select].dirty = true;
 					
-			struct timeval tv3;
-			gettimeofday(&tv3, NULL);
+			struct timeval tv1;
+			gettimeofday(&tv1, NULL);
 
 	        total_mem_count ++;
-	        total_mem_time += (tv3.tv_sec*1000+tv3.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
+	        total_mem_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
 			
             return;
 		}
@@ -270,11 +270,11 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 					}
 			        cache[index*4+i].dirty = true;
 					
-					struct timeval tv4;
-					gettimeofday(&tv4, NULL);
+					struct timeval tv1;
+					gettimeofday(&tv1, NULL);
 
 					total_mem_count ++;
-					total_mem_time += (tv4.tv_sec*1000+tv4.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
+					total_mem_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
 			
 				    return;
 			    }
