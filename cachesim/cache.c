@@ -5,7 +5,7 @@
 struct cache_unit {
     bool valid;
 	bool dirty;
-	uint8_t tag;
+	uint16_t tag;
     uint8_t block[BLOCK_SIZE];
 };
 
@@ -36,7 +36,7 @@ uint32_t cache_read(uintptr_t addr) {
 //	printf("----READ-----||block_inside_offset:0x%x\n",(uint32_t)block_inside_offset);
 	uint8_t index = ((addr >> 6) & 0x3f); //用于cache组号
 //	printf("----READ-----||index:0x%x\n",(uint32_t)index);
-	uint8_t tag = ((addr >> 12) & 0xff); //用于记录块群号
+	uint16_t tag = ((addr >> 12) & 0xff); //用于记录块群号
 //	printf("----READ-----||tag:0x%x\n",(uint32_t)tag);
 	mem_block_NO = ((mem_block_NO + tag) << 6)+index;
 
@@ -127,7 +127,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 //	printf("----WRITE-----||block_inside_offset:0x%x\n",(uint32_t)block_inside_offset);
 	uint8_t index = ((addr >> 6) & 0x3f); //用于cache组号
 //	printf("----WRITE-----||index:0x%x\n",(uint32_t)index);
-	uint8_t tag = ((addr >> 12) & 0xff); //用于记录块群号
+	uint16_t tag = ((addr >> 12) & 0xff); //用于记录块群号
 //	printf("----WRITE-----||tag:0x%x\n",(uint32_t)tag);
 	mem_block_NO = ((mem_block_NO + tag) << 6)+index;
 
