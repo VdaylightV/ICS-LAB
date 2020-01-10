@@ -115,6 +115,7 @@ uint32_t cache_read(uintptr_t addr) {
 // 例如当‘wmask’为‘0xff’时，只写入低8比特
 // 若缺失，需先从内存中读入数据
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
+	/*
 	printf("----CPU WRITE-----||Address:0x%x  Data:0x%x\n",(uint32_t)addr, data);
 	//printf("@@@@@@@@@@@wmask:0x%x\n",wmask);
 	
@@ -215,7 +216,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 
 	
 	}
-	
+	*/
 
 
 }
