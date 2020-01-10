@@ -536,7 +536,7 @@ void display_statistic(void) {
 	printf("-----Total mem time:%lu\n", total_mem_time);
 
 	
-	for(int i = 0; i < 256; i ++) {
+	for(int i = 0; i < 4 i ++) {
 		if(cache[i].valid == true) {
 	        printf("-----SLOT:%d-----TAG:%d-----DIRTY:%d", i, cache[i].tag, cache[i].dirty);
 		    for(int j = 0; j < 64; j ++) {
