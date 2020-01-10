@@ -1,6 +1,7 @@
 #include "common.h"
 #include <inttypes.h>
 #include <string.h>
+#include <sys/time.h>
 
 struct cache_unit {
     bool valid;
