@@ -26,7 +26,7 @@ void cycle_increase(int n) { cycle_cnt += n; }
 // 从cache中读出‘addr’地址处的四字节数据
 // 若缺失，需先从内存读入数据
 uint32_t cache_read(uintptr_t addr) {
-	printf("----CPU READ-----||Address:0x%x\n",(uint32_t)addr);
+////	printf("----CPU READ-----||Address:0x%x\n",(uint32_t)addr);
 	bool hit = false; //用于判断是否命中
 	uint32_t result = 0; //用于存放返回结果
 	bool full = false; //用于判断对应的组(set)内是否已满
@@ -43,7 +43,7 @@ uint32_t cache_read(uintptr_t addr) {
 
     for(int i = 0; i < 4; i ++) {
 	    if(cache[index*4+i].tag == tag && cache[index*4+i].valid == true) {
-			printf("!!!!!!!!HIT!!!!!!!!\n");
+////			printf("!!!!!!!!HIT!!!!!!!!\n");
 		    hit = true;
 			/*
 			for(int j = 0; j < 4; j ++) {
@@ -117,7 +117,7 @@ uint32_t cache_read(uintptr_t addr) {
 // 若缺失，需先从内存中读入数据
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 	
-	printf("----CPU WRITE-----||Address:0x%x  Data:0x%x\n",(uint32_t)addr, data);
+////	printf("----CPU WRITE-----||Address:0x%x  Data:0x%x\n",(uint32_t)addr, data);
 	//printf("@@@@@@@@@@@wmask:0x%x\n",wmask);
 	
 	bool hit = false; //用于判断是否命中
@@ -140,7 +140,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 
     for(int i = 0; i < 4; i ++) {
 	    if(cache[index*4+i].tag == tag &&  cache[index*4+i].valid == true) {
-		    printf("!!!!!!!!HIT!!!!!!!!\n");
+////		    printf("!!!!!!!!HIT!!!!!!!!\n");
 		    hit = true;
 		    switch(wmask) {
 			    case 0x0: assert(0); break;

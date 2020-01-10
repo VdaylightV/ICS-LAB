@@ -44,12 +44,12 @@ static void trace_exec(struct trace *t, bool is_check) {
     uint32_t ret = cpu_read(t->t.addr, t->t.len);
     if (is_check) {
       uint32_t ret_uncache = cpu_uncache_read(t->t.addr, t->t.len);
-	  if(ret_uncache == ret) printf("HIT GOOD TRAP!\n");//Just for test
+////	  if(ret_uncache == ret) printf("HIT GOOD TRAP!\n");//Just for test
 	  if(ret_uncache != ret) 
 	  {
 		  display_statistic();
-		  printf("ADDR:0x%x  LEN:0x%x\n", t->t.addr, t->t.len);//Just for test
-		  printf("HIT BAD TRAP! ret:0x%x  ret_uncache:0x%x\n", ret, ret_uncache);//Just for test
+////		  printf("ADDR:0x%x  LEN:0x%x\n", t->t.addr, t->t.len);//Just for test
+////		  printf("HIT BAD TRAP! ret:0x%x  ret_uncache:0x%x\n", ret, ret_uncache);//Just for test
 
 	  }
 	  assert(ret == ret_uncache);
