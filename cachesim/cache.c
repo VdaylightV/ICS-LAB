@@ -32,8 +32,8 @@ uint32_t cache_read(uintptr_t addr) {
 	bool full = false; //用于判断对应的组(set)内是否已满
 	uint16_t mem_block_NO = 0; //用于记录主存块号
 
-	uint8_t block_inside_offset = (addr & 0x3f); //用于记录块内偏移量
-//	uint8_t block_inside_offset = ((addr & 0x3f) & ~0x3); //用于记录块内偏移量
+//	uint8_t block_inside_offset = (addr & 0x3f); //用于记录块内偏移量
+	uint8_t block_inside_offset = ((addr & 0x3f) & ~0x3); //用于记录块内偏移量
 //	printf("----READ-----||block_inside_offset:0x%x\n",(uint32_t)block_inside_offset);
 	uint8_t index = ((addr >> 6) & 0x3f); //用于cache组号
 //	printf("----READ-----||index:0x%x\n",(uint32_t)index);
