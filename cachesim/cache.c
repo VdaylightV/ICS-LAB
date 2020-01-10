@@ -64,7 +64,7 @@ uint32_t cache_read(uintptr_t addr) {
 
 			for(int j = 4; j > 0; j --) {
 			    result += (cache[index*4+i].block[block_inside_offset+j-1] << (j-1)*8);
-			}
+			
 
 			struct timeval tv1;
 			gettimeofday(&tv1, NULL);
