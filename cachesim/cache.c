@@ -24,8 +24,8 @@ static uint64_t total_cache_time = 0;
 static uint64_t total_cache_count = 0;
 
 
-static uint64_t total_mem_time = 0;
-static uint64_t total_mem_count = 0;
+//static uint64_t total_mem_time = 0;
+//static uint64_t total_mem_count = 0;
 
 void cycle_increase(int n) { cycle_cnt += n; }
 
