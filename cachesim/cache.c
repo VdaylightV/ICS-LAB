@@ -10,9 +10,9 @@ struct cache_unit {
     uint8_t block[BLOCK_SIZE];
 };
 
-struct cache_unit cache[64];
+//struct cache_unit cache[64];
 //struct cache_unit cache[4];
-//struct cache_unit cache[256];
+struct cache_unit cache[256];
 
 // 从块号为‘block_num’的内存地址中读出一整个cache块大小的内容到‘buf’中
 void mem_read(uintptr_t block_num, uint8_t *buf);
@@ -33,7 +33,7 @@ void cycle_increase(int n) { cycle_cnt += n; }
 
 // TODO: implement the following functions
 
-/*
+
 // 从cache中读出‘addr’地址处的四字节数据
 // 若缺失，需先从内存读入数据
 uint32_t cache_read(uintptr_t addr) {
@@ -275,7 +275,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 
 
 }
-*/
+
 
 /*
 // 从cache中读出‘addr’地址处的四字节数据
@@ -521,6 +521,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 }
 */
 
+/*
 // 从cache中读出‘addr’地址处的四字节数据
 // 若缺失，需先从内存读入数据
 uint32_t cache_read(uintptr_t addr) {
@@ -762,6 +763,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 
 
 }
+*/
 
 // 初始化一个数据大小为‘2^total_size_width'B，关联度为’2^associativity_width‘
 // 例如’init_cache(14, 2)'将初始化一个16KB，4路组相联的cache
@@ -769,7 +771,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 void init_cache(int total_size_width, int associativity_width) {
 	//int size = (exp2(total_size_width) / BLOCK_SIZE);
 
-	for(int i = 0; i < 64; i++) {
+	for(int i = 0; i < 256; i++) {
 	    cache[i].valid = false;
 	}
 }
