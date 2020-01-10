@@ -48,7 +48,7 @@ static void trace_exec(struct trace *t, bool is_check) {
 	  if(ret_uncache != ret) 
 	  {
 		  printf("HIT BAD TRAP! ret:0x%x  ret_uncache:0x%x\n", ret, ret_uncache);//Just for test
-//		  display_statistic();
+		  display_statistic();
 
 	  }
 	  assert(ret == ret_uncache);
