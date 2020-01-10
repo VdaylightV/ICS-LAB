@@ -481,7 +481,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 		else {
 		    for(int i = 0; i < 2; i ++) {
 		        if(cache[index*2+i].valid == false) {
-			        mem_read(mem_block_NO, &(cache[index*4+i].block[0]));
+			        mem_read(mem_block_NO, &(cache[index*2+i].block[0]));
 				    cache[index*2+i].valid = true;
 				    cache[index*2+i].tag = tag;
 		            switch(wmask) {
