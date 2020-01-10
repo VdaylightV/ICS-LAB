@@ -65,6 +65,7 @@ uint32_t cache_read(uintptr_t addr) {
 			for(int j = 4; j > 0; j --) {
 			    result += (cache[index*4+i].block[block_inside_offset+j-1] << (j-1)*8);
 			
+		    }
 
 			struct timeval tv1;
 			gettimeofday(&tv1, NULL);
@@ -73,7 +74,7 @@ uint32_t cache_read(uintptr_t addr) {
 			total_cache_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
 			
             return result;
-		}
+	    }
 	}
     
 	if(hit == false) { //未命中，访问内存
