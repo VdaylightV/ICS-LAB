@@ -19,6 +19,13 @@ void mem_write(uintptr_t block_num, const uint8_t *buf);
 
 static uint64_t cycle_cnt = 0;
 
+static uint64_t total_cache_time = 0;
+static uint64_t total_cache_count = 0;
+
+
+static uint64_t total_mem_time = 0;
+static uint64_t total_mem_count = 0;
+
 void cycle_increase(int n) { cycle_cnt += n; }
 
 // TODO: implement the following functions
@@ -51,9 +58,18 @@ uint32_t cache_read(uintptr_t addr) {
 			}
 			*/
 			
+			struct timeval tv0;
+			gettimeofday(&tv0, NULL);
+
 			for(int j = 4; j > 0; j --) {
 			    result += (cache[index*4+i].block[block_inside_offset+j-1] << (j-1)*8);
 			}
+
+			struct timeval tv1;
+			gettimeofday(&tv1, NULL);
+
+			total_cache_count ++;
+			total_cache_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
 			
             return result;
 		}
@@ -142,6 +158,10 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 	    if(cache[index*4+i].tag == tag &&  cache[index*4+i].valid == true) {
 ////		    printf("!!!!!!!!HIT!!!!!!!!\n");
 		    hit = true;
+
+			struct timeval tv0;
+			gettimeofday(&tv0, NULL);
+
 		    switch(wmask) {
 			    case 0x0: assert(0); break;
 			    case 0xff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 1); break;
@@ -157,6 +177,13 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 				default: printf("------Shoul not reach here!!!------wmask:0x%x\n",wmask); break;
 			}
 			cache[index*4+i].dirty = true;
+
+			struct timeval tv1;
+			gettimeofday(&tv1, NULL);
+
+			total_cache_count ++;
+			total_cache_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
+
             return;
 		}
 	}
@@ -237,6 +264,11 @@ void init_cache(int total_size_width, int associativity_width) {
 }
 
 void display_statistic(void) {
+
+	printf("-----Total cache count:%d\n", total_cache_count);
+	printf("-----Total cache time:%d\n", total_cache_time);
+
+	/*
 	for(int i = 0; i < 256; i ++) {
 		if(cache[i].valid == true) {
 	        printf("-----SLOT:%d-----TAG:%d-----DIRTY:%d", i, cache[i].tag, cache[i].dirty);
@@ -249,4 +281,5 @@ void display_statistic(void) {
 			printf("\n");
 		}
 	}
+	*/
 }

@@ -33,7 +33,7 @@ struct trace {
 };
 
 static void trace_exec(struct trace *t, bool is_check) {
-//  display_statistic();
+  display_statistic();
   if (t->t.is_write) {
     cpu_write(t->t.addr, t->t.len, t->data);
     if (is_check) {
@@ -142,7 +142,7 @@ int main(int argc, char *argv[]) {
 
   replay_trace();
 
-  //display_statistic();
+  display_statistic();
 
   return 0;
 }
