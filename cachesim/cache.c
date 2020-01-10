@@ -239,7 +239,7 @@ void display_statistic(void) {
 		    for(int j = 0; j < 64; j ++) {
 			    printf("| INDEX:%d  0x%x |  ", j, cache[i].block[j]);
 			}
-			printf("\n")
+			printf("\n");
 		}
 	}
 }
