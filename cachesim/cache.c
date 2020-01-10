@@ -234,7 +234,7 @@ void init_cache(int total_size_width, int associativity_width) {
 
 void display_statistic(void) {
 	for(int i = 0; i < 256; i ++) {
-	    printf("-----SLOT:%d-----\n", i);
+	    printf("-----SLOT:%d-----TAG:%d\n", i, cache[i].tag);
 		if(cache[i].valid == true) {
 		    for(int j = 0; j < 64; j ++) {
 			    printf("| INDEX:%d  0x%x |  ", j, cache[i].block[j]);
