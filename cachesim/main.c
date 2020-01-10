@@ -22,7 +22,7 @@ static void init_rand(uint32_t seed) {
 static inline uint32_t choose(uint32_t n) { return rand() % n; }
 
 struct _trace {
-  uint32_t addr : 20;
+  uint32_t addr : 28;
   uint8_t len : 3;
   bool is_write : 1;
 };
