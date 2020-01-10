@@ -24,8 +24,8 @@ static uint64_t total_cache_time = 0;
 static uint64_t total_cache_count = 0;
 
 
-//static uint64_t total_mem_time = 0;
-//static uint64_t total_mem_count = 0;
+static uint64_t total_mem_time = 0;
+static uint64_t total_mem_count = 0;
 
 void cycle_increase(int n) { cycle_cnt += n; }
 
@@ -77,6 +77,10 @@ uint32_t cache_read(uintptr_t addr) {
 	}
     
 	if(hit == false) { //未命中，访问内存
+			
+		struct timeval tv0;
+		gettimeofday(&tv0, NULL);
+
 		full = cache[index*4].valid && cache[index*4+1].valid && cache[index*4+2].valid && cache[index*4+3].valid; //先检查对应的cache组是否满了
 		if(full == true) {
 		    uint8_t random_select = rand() % 4; //满了随机选择一个替换
@@ -99,6 +103,12 @@ uint32_t cache_read(uintptr_t addr) {
 			    result += (cache[index*4+random_select].block[block_inside_offset+j-1] << (j-1)*8);
 			}
 			
+			struct timeval tv1;
+			gettimeofday(&tv1, NULL);
+
+			total_mem_count ++;
+			total_mem_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
+			
 			return result;
 
 		}
@@ -118,6 +128,12 @@ uint32_t cache_read(uintptr_t addr) {
 						result += (cache[index*4+i].block[block_inside_offset+j-1] << (j-1)*8);
 					}
 					
+			        struct timeval tv1;
+			        gettimeofday(&tv1, NULL);
+
+			        total_mem_count ++;
+			        total_mem_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
+			
                     return result;
 			    }
 		    }
@@ -190,6 +206,10 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 	}
 
 	if(hit == false) { //未命中，访问内存
+
+		struct timeval tv0;
+		gettimeofday(&tv0, NULL);
+
 		full = cache[index*4].valid && cache[index*4+1].valid && cache[index*4+2].valid && cache[index*4+3].valid; //先检查对应的cache组是否满了
 		if(full == true) {
 		    uint8_t random_select = rand() % 4; //满了随机选择一个替换
@@ -218,6 +238,13 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 				default: printf("------Shoul not reach here!!!------wmask:0x%x\n",wmask); break;
 			}
 			cache[index*4+random_select].dirty = true;
+					
+			struct timeval tv1;
+			gettimeofday(&tv1, NULL);
+
+	        total_mem_count ++;
+	        total_mem_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
+			
             return;
 		}
 		else {
@@ -241,6 +268,13 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 						default: printf("------Shoul not reach here!!!------wmask:0x%x\n",wmask); break;
 					}
 			        cache[index*4+i].dirty = true;
+					
+					struct timeval tv1;
+					gettimeofday(&tv1, NULL);
+
+					total_mem_count ++;
+					total_mem_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
+			
 				    return;
 			    }
 		    }
@@ -268,6 +302,8 @@ void display_statistic(void) {
 
 	printf("-----Total cache count:%ld\n", total_cache_count);
 	printf("-----Total cache time:%ld\n", total_cache_time);
+	printf("-----Total mem count:%ld\n", total_mem_count);
+	printf("-----Total mem time:%ld\n", total_mem_time);
 
 	/*
 	for(int i = 0; i < 256; i ++) {
