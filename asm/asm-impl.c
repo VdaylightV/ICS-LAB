@@ -23,7 +23,7 @@ int64_t asm_add(int64_t a, int64_t b) {
 }
 
 int asm_popcnt(uint64_t n) {
-	int count = 0, i = 0;
+	uint64_t count = 0, uint64_t i = 0;
 	for(; i < n; i ++) {
 	    asm (
 			"movq %1, %%rbx\n\t"
@@ -34,8 +34,8 @@ int asm_popcnt(uint64_t n) {
 			"shrq $1, %%rax\n\t"
 			"equ:\n\t"
 			"shrq $1, %%rax\n\t"
-			:"=R"(count)
-			:"a"(n), "rD"(i)
+			:"=r"(count)
+			:"a"(n), "D"(i)
 			: "rbx"
 		);
 	}
