@@ -66,11 +66,13 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			"jnb end;"
             "leaq (%2, %4, 1), %%rdx;"			
 			"movb %%dl, (%1, %4, 1)"
+			"addq $0x1, %4;"
+			"jmp body;"
 			"end:\n\t"
 
 			:"+m"(dest)
 			:"m"(dest), "m"(src), "r"(n), "r"(i)
-			:
+			: "rdx"
 	);
   // TODO: implement
   return NULL;
