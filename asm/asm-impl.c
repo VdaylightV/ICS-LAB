@@ -34,6 +34,7 @@ int asm_popcnt(uint64_t n) {
 			"je equ;"
 			"addq $1, %0\n\t"
 			"shrq $1, %2\n\t"
+			"end:"
 			"equ:\n\t"
 			"shrq $1, %2"
 			:"+r"(count), "=r"(n)
