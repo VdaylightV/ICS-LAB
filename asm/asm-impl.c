@@ -32,9 +32,9 @@ int asm_popcnt(uint64_t n) {
 			"andq $0x1, %%rbx\n\t"
 			"testq %%rbx, %%rbx\n\t"
 			"je equ;"
-			"addq $1, %0\n\t"
-			"shrq $1, %2\n\t"
-			"end:"
+			"addq $0x1, %0\n\t"
+			"shrq $0x1, %2\n\t"
+			"end:\n\t"
 			"equ:\n\t"
 			"shrq $1, %2"
 			:"+r"(count), "=r"(n)
