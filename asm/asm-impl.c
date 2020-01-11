@@ -59,23 +59,24 @@ int asm_popcnt(uint64_t n) {
 }
 
 void *asm_memcpy(void *dest, const void *src, size_t n) {
+	char *ret = NULL;
 	size_t i = 0;
 	asm (
-			"body:\n\t"
+			"loop:\n\t"
 			"cmpl %3, %4;"
 			"jnb end;"
             "leaq (%2, %4, 1), %%rdx;"			
 			"movb %%dl, (%1, %4, 1)"
 			"addq $0x1, %4;"
-			"jmp body;"
+			"jmp loop;"
 			"end:\n\t"
 
-			:"+m"(dest)
+			:"+m"(ret)
 			:"m"(dest), "m"(src), "r"(n), "r"(i)
 			: "rdx"
 	);
   // TODO: implement
-  return NULL;
+  return ret;
 }
 
 int asm_setjmp(asm_jmp_buf env) {
