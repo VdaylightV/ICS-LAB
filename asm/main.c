@@ -18,9 +18,13 @@ int main() {
   // TODO: add memcpy tests here!
   char a[5] = "abcd";
   char b[3] = "12";
+  char c[27] = "abcdefghijklmnopqrstuvwxyz";
+  char d[11] = "0123456789";
   
   assert(asm_memcpy(&a[0], &b[0], 2) == &a[0]);
   printf("------result:%s--------\n",&a[0]);
+  assert(asm_memcpy(&c[0], &d[0], 10) == &c[0]);
+  printf("------result:%s--------\n",&c[0]);
 
   // setjmp test starts here
   setjmp_test0();
