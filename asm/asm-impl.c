@@ -85,12 +85,12 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 }
 
 int asm_setjmp(asm_jmp_buf env) {
-	int ret_val = 0;
+	int ret_val;
 
 	asm (
 			"pushl %%ebx;"
 			"movl 8(%%esp), %%ebx;"
-			"movl %%eax, (%ebx);"
+			"movl %%eax, (%%ebx);"
 			"popl %%eax;"
 			"movl %%eax, 4(%%ebx);"
 			"movl %%ecx, 8(%%ebx);"
