@@ -31,9 +31,9 @@ int asm_popcnt(uint64_t n) {
 			"testq %%rbx, %%rbx\n\t"
 			"je equ\n\t"
 			"addq $1, %0\n\t"
-			"shrq $1, %%rax"
+			"shrq $1, %%rax\n\t"
 			"equ:\n\t"
-			"shrq $1, %%rax"
+			"shrq $1, %%rax\n\t"
 			:"=r"(count)
 			:"a"(n), "D"(i)
 			: "rbx"
