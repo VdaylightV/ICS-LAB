@@ -25,7 +25,7 @@ int64_t asm_add(int64_t a, int64_t b) {
 int asm_popcnt(uint64_t n) {
 
 	uint64_t count = 0, i = 0;
-	for(; i < 64; i ++) {
+	for(; i < 6; i ++) {
 	    asm (
 			"movq %1, %%rbx\n\t"
 			"andq $0x1, %%rbx\n\t"
