@@ -73,12 +73,12 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			"movq %1, %%rax;"
 			"movq %%rax, %0;"
 
-			:"+m"(ret)
+			:"=r"(dest)
 			:"r"(dest), "r"(src), "r"(n), "r"(i)
 			: "rdx"
 	);
   // TODO: implement
-  return ret;
+  return dest;
 }
 
 int asm_setjmp(asm_jmp_buf env) {
