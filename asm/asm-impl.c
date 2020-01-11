@@ -23,10 +23,24 @@ int64_t asm_add(int64_t a, int64_t b) {
 }
 
 int asm_popcnt(uint64_t n) {
-//	int s = 0;
-//	int i = 0;
+	int count = 0, i = 0;
+	for(; i < n; i ++) {
+	    asm (
+			"movl %1, %%ebx\n\t"
+			"andl $0x1, %%ebx\n\t"
+			"testl %%ebx, %%ebx\n\t"
+			"je equ\n\t"
+			"addl $1, %0\n\t"
+			"shrl %%eax, %%eax"
+			"equ:\n\t"
+			"shrl %%eax, %%eax"
 
-//	asm ( "movl %1 %%eax" ::"r"(n): "%eax" );
+			:"=r"(count)
+			:"a"(n), "D"(i)
+			:
+		);
+	}
+
   // TODO: implement
   
   return 0;
