@@ -6,7 +6,6 @@ int tc(uint64_t x) {
 }
 
 int cnt(uint64_t x) {
-	static int a;
     static int s = 0;
 	for(int i = 0; i < 16; i ++) {
 	  if((x >> i) & 1) s ++;
