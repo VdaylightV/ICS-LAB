@@ -31,7 +31,7 @@ int asm_popcnt(uint64_t n) {
 			"movq %2, %%rbx\n\t"
 			"andq $0x1, %%rbx\n\t"
 			"testq %%rbx, %%rbx\n\t"
-			"je equ\n\t"
+			"je equ;"
 			"addq $1, %0\n\t"
 			"shrq $1, %2\n\t"
 			"equ:\n\t"
