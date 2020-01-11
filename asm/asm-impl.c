@@ -74,7 +74,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 
 			:"=r"(dest)
 			:"r"(dest), "r"(src), "r"(n), "r"(i)
-			: "rdx"
+			: "rdx", "rax"
 	);
   // TODO: implement
   return dest;
