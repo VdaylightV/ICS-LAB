@@ -112,6 +112,27 @@ int asm_setjmp(asm_jmp_buf env) {
 }
 
 void asm_longjmp(asm_jmp_buf env, int val) {
-	m
+	asm (
+			"movl 4(%%esp), %%ebx;"
+			"movl 8(%%esp), %%eax;"
+			"movl 24(%%ebx), %%esp;"
+			"movl 32(%%ebx), %%edi;"
+			"movl %%edi, 0(%%esp);"
+			"movl 8(%%ebx), %%ecx;"
+			"movl 12(%%ebx), %%edx;"
+			"movl 16(%%ebx), %%esi;"
+			"movl 20(%%ebx), %%edi;"
+			"movl 28(%%ebx), %%ebp;"
+			"movl 4(%%ebx), %%ebx;"
+			"testl %%eax, %%eax;"
+			"jne bye"
+			"incl %%eax;"
+			"bye:i\n\t"
+			"ret;"
+			:
+			:
+			:
+			
+	);
   // TODO: implement
 }
