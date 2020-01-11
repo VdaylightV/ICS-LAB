@@ -34,10 +34,9 @@ int asm_popcnt(uint64_t n) {
 			"shrl %%eax, %%eax"
 			"equ:\n\t"
 			"shrl %%eax, %%eax"
-
 			:"=r"(count)
 			:"a"(n), "D"(i)
-			:
+			: "ebx"
 		);
 	}
 
