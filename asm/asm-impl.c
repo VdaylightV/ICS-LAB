@@ -36,7 +36,7 @@ int asm_popcnt(uint64_t n) {
 			"addq $0x1, %0;"
 			"equ:\n\t"
 			:"+r"(count), "=a"(n)
-			:"a"(n), "c"(i)
+			:"a"(n), "r"(i)
 			: "rbx"
 		);
 		printf("----n:%lx, count:%lx----\n",n ,count);
