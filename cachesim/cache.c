@@ -12,7 +12,8 @@ struct cache_unit {
 
 //struct cache_unit cache[64];
 //struct cache_unit cache[4];
-struct cache_unit cache[256];
+//struct cache_unit cache[256];
+struct cache_unit cache[512];
 
 // 从块号为‘block_num’的内存地址中读出一整个cache块大小的内容到‘buf’中
 void mem_read(uintptr_t block_num, uint8_t *buf);
@@ -33,7 +34,249 @@ void cycle_increase(int n) { cycle_cnt += n; }
 
 // TODO: implement the following functions
 
+// 从cache中读出‘addr’地址处的四字节数据
+// 若缺失，需先从内存读入数据
+uint32_t cache_read(uintptr_t addr) {
+////	printf("----CPU READ-----||Address:0x%x\n",(uint32_t)addr);
+	bool hit = false; //用于判断是否命中
+	uint32_t result = 0; //用于存放返回结果
+	bool full = false; //用于判断对应的组(set)内是否已满
+	uint16_t mem_block_NO = 0; //用于记录主存块号
 
+//	uint8_t block_inside_offset = (addr & 0x3f); //用于记录块内偏移量
+	uint8_t block_inside_offset = ((addr & 0x3f) & ~0x3); //用于记录块内偏移量
+//	printf("----READ-----||block_inside_offset:0x%x\n",(uint32_t)block_inside_offset);
+	uint8_t index = ((addr >> 6) & 0x7f); //用于cache组号
+//	printf("----READ-----||index:0x%x\n",(uint32_t)index);
+	uint16_t tag = ((addr >> 13) & 0x7f); //用于记录块群号
+//	printf("----READ-----||tag:0x%x\n",(uint32_t)tag);
+	mem_block_NO = ((mem_block_NO + tag) << 7)+index;
+
+    for(int i = 0; i < 4; i ++) {
+	    if(cache[index*4+i].tag == tag && cache[index*4+i].valid == true) {
+////			printf("!!!!!!!!HIT!!!!!!!!\n");
+		    hit = true;
+			
+			struct timeval tv0;
+			gettimeofday(&tv0, NULL);
+
+			for(int j = 4; j > 0; j --) {
+			    result += (cache[index*4+i].block[block_inside_offset+j-1] << (j-1)*8);
+			
+		    }
+
+			struct timeval tv1;
+			gettimeofday(&tv1, NULL);
+
+			total_cache_count ++;
+			total_cache_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
+			
+            return result;
+	    }
+	}
+    
+	if(hit == false) { //未命中，访问内存
+			
+		struct timeval tv0;
+		gettimeofday(&tv0, NULL);
+
+		full = cache[index*4].valid && cache[index*4+1].valid && cache[index*4+2].valid && cache[index*4+3].valid; //先检查对应的cache组是否满了
+		if(full == true) {
+		    uint8_t random_select = rand() % 4; //满了随机选择一个替换
+			if(cache[index*4+random_select].dirty == true) {
+				uint16_t old_mem_block_NO = 0;
+				old_mem_block_NO = ((old_mem_block_NO + cache[index*4+random_select].tag) << 7)+index; //计算将要被替换的一块所对应的主存块号
+				mem_write(old_mem_block_NO, &(cache[index*4+random_select].block[0])); //回写
+			}
+		    mem_read(mem_block_NO, &(cache[index*4+random_select].block[0]));
+			cache[index*4+random_select].tag = tag;
+			cache[index*4+random_select].valid = true;
+			cache[index*4+random_select].dirty = false; //完成从内存读取替换
+			
+			for(int j = 4; j > 0; j --) {
+			    result += (cache[index*4+random_select].block[block_inside_offset+j-1] << (j-1)*8);
+			}
+			
+			struct timeval tv1;
+			gettimeofday(&tv1, NULL);
+
+			total_mem_count ++;
+			total_mem_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
+			
+			return result;
+
+		}
+		else {
+		    for(int i = 0; i < 4; i ++) {
+		        if(cache[index*4+i].valid == false) {
+			        mem_read(mem_block_NO, &(cache[index*4+i].block[0]));
+				    cache[index*4+i].valid = true;
+			        cache[index*4+i].tag = tag;
+					
+					for(int j = 4; j > 0; j --) {
+						result += (cache[index*4+i].block[block_inside_offset+j-1] << (j-1)*8);
+					}
+					
+			        struct timeval tv1;
+			        gettimeofday(&tv1, NULL);
+
+			        total_mem_count ++;
+			        total_mem_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
+			
+                    return result;
+			    }
+		    }
+		}
+
+	
+	}
+
+	return -1;
+}
+
+// 往cache中‘addr’地址所属的块写入数据‘data’，写掩码为‘wmask’
+// 例如当‘wmask’为‘0xff’时，只写入低8比特
+// 若缺失，需先从内存中读入数据
+void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
+	
+////	printf("----CPU WRITE-----||Address:0x%x  Data:0x%x\n",(uint32_t)addr, data);
+	//printf("@@@@@@@@@@@wmask:0x%x\n",wmask);
+	
+	bool hit = false; //用于判断是否命中
+	bool full = false; //用于判断对应的组(set)内是否已满
+	uint16_t mem_block_NO = 0; //用于记录主存块号
+
+//	uint8_t block_inside_offset = ((addr & 0x3f) & ~0x3); //用于记录块内偏移量
+	uint8_t block_inside_offset = (addr & 0x3f); //用于记录块内偏移量
+//	printf("----WRITE-----||block_inside_offset:0x%x\n",(uint32_t)block_inside_offset);
+	uint8_t index = ((addr >> 6) & 0x7f); //用于cache组号
+//	printf("----WRITE-----||index:0x%x\n",(uint32_t)index);
+	uint16_t tag = ((addr >> 13) & 0x7f); //用于记录块群号
+//	printf("----WRITE-----||tag:0x%x\n",(uint32_t)tag);
+	mem_block_NO = ((mem_block_NO + tag) << 7)+index;
+
+	uint8_t data_set[4];
+	for(int i = 0; i < 4; i ++) {
+	   data_set[i] = ((data >> 8*i) & 0xff);
+	}
+
+    for(int i = 0; i < 4; i ++) {
+	    if(cache[index*4+i].tag == tag &&  cache[index*4+i].valid == true) {
+////		    printf("!!!!!!!!HIT!!!!!!!!\n");
+		    hit = true;
+
+			struct timeval tv0;
+			gettimeofday(&tv0, NULL);
+
+		    switch(wmask) {
+			    case 0x0: assert(0); break;
+			    case 0xff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 1); break;
+			    case 0xff00: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[1], 1); break;
+			    case 0xff0000: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[2], 1); break;
+			    case 0xff000000: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[3], 1); break;
+			    case 0xffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 2); break;
+			    case 0xffff00: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[1], 2); break;
+			    case 0xffff0000: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[2], 2); break;
+			    case 0xffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 3); break;
+			    case 0xffffff00: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[1], 3); break;
+			    case 0xffffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 4); break;
+				default: printf("------Shoul not reach here!!!------wmask:0x%x\n",wmask); break;
+			}
+			cache[index*4+i].dirty = true;
+
+			struct timeval tv1;
+			gettimeofday(&tv1, NULL);
+
+			total_cache_count ++;
+			total_cache_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
+
+            return;
+		}
+	}
+
+	if(hit == false) { //未命中，访问内存
+
+		struct timeval tv0;
+		gettimeofday(&tv0, NULL);
+
+		full = cache[index*4].valid && cache[index*4+1].valid && cache[index*4+2].valid && cache[index*4+3].valid; //先检查对应的cache组是否满了
+		if(full == true) {
+		    uint8_t random_select = rand() % 4; //满了随机选择一个替换
+			if(cache[index*4+random_select].dirty == true) {
+				uint16_t old_mem_block_NO = 0;
+				old_mem_block_NO = ((old_mem_block_NO + cache[index*4+random_select].tag) << 7)+index; //计算将要被替换的一块所对应的主存块号
+				mem_write(old_mem_block_NO, &(cache[index*4+random_select].block[0])); //回写
+			}
+		    mem_read(mem_block_NO, &(cache[index*4+random_select].block[0]));
+			cache[index*4+random_select].valid = true;
+			cache[index*4+random_select].tag = tag;
+			cache[index*4+random_select].dirty = false; //完成从内存读取替换
+
+		    switch(wmask) {
+			    case 0x0: assert(0); break;
+			    case 0xff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 1); break;
+			    case 0xff00: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[1], 1); break;
+			    case 0xff0000: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[2], 1); break;
+			    case 0xff000000: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[3], 1); break;
+			    case 0xffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 2); break;
+			    case 0xffff00: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[1], 2); break;
+			    case 0xffff0000: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[2], 2); break;
+			    case 0xffffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 3); break;
+			    case 0xffffff00: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[1], 3); break;
+			    case 0xffffffff: memcpy(&(cache[index*4+random_select].block[block_inside_offset]), &data_set[0], 4); break;
+				default: printf("------Shoul not reach here!!!------wmask:0x%x\n",wmask); break;
+			}
+			cache[index*4+random_select].dirty = true;
+					
+			struct timeval tv1;
+			gettimeofday(&tv1, NULL);
+
+	        total_mem_count ++;
+	        total_mem_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
+			
+            return;
+		}
+		else {
+		    for(int i = 0; i < 4; i ++) {
+		        if(cache[index*4+i].valid == false) {
+			        mem_read(mem_block_NO, &(cache[index*4+i].block[0]));
+				    cache[index*4+i].valid = true;
+				    cache[index*4+i].tag = tag;
+		            switch(wmask) {
+			            case 0x0: assert(0); break;
+			            case 0xff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 1); break;
+			            case 0xff00: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[1], 1); break;
+			            case 0xff0000: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[2], 1); break;
+						case 0xff000000: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[3], 1); break;
+						case 0xffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 2); break;
+					    case 0xffff00: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[1], 2); break;
+						case 0xffff0000: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[2], 2); break;
+						case 0xffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 3); break;
+						case 0xffffff00: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[1], 3); break;
+						case 0xffffffff: memcpy(&(cache[index*4+i].block[block_inside_offset]), &data_set[0], 4); break;
+						default: printf("------Shoul not reach here!!!------wmask:0x%x\n",wmask); break;
+					}
+			        cache[index*4+i].dirty = true;
+					
+					struct timeval tv1;
+					gettimeofday(&tv1, NULL);
+
+					total_mem_count ++;
+					total_mem_time += (tv1.tv_sec*1000+tv1.tv_usec - tv0.tv_sec*1000-tv0.tv_usec);
+			
+				    return;
+			    }
+		    }
+		}
+
+	
+	}
+	
+
+
+}
+
+/*
 // 从cache中读出‘addr’地址处的四字节数据
 // 若缺失，需先从内存读入数据
 uint32_t cache_read(uintptr_t addr) {
@@ -275,7 +518,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 
 
 }
-
+*/
 
 /*
 // 从cache中读出‘addr’地址处的四字节数据
