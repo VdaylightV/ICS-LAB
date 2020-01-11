@@ -50,7 +50,7 @@ int asm_popcnt(uint64_t n) {
 			:"a"(n), "r"(i)
 			: "rbx"
 		);
-		printf("----n:%lx, count:%lx, i:%lx----\n",n ,count,i);
+//		printf("----n:%lx, count:%lx, i:%lx----\n",n ,count,i);
 	//}
 
   // TODO: implement
@@ -59,6 +59,9 @@ int asm_popcnt(uint64_t n) {
 }
 
 void *asm_memcpy(void *dest, const void *src, size_t n) {
+	asm (
+			
+	);
   // TODO: implement
   return NULL;
 }
