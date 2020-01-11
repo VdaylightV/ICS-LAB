@@ -11,7 +11,7 @@ int main() {
   // TODO: add more tests here!
   assert(asm_add(1, 2) == 3);
   assert(asm_add(99, 123) == 222);
-  assert(asm_popcnt(0xffffffffffffffffull) == 64);
+  assert(asm_popcnt(0xffffffffffffff0full) == 64);
 
   // TODO: add memcpy tests here!
   assert(asm_memcpy(NULL, NULL, 0) == NULL);
