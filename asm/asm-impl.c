@@ -103,7 +103,7 @@ int asm_setjmp(asm_jmp_buf env) {
 			"movl -4(%%esp), %%ebx;"
 			"xorl %%eax; %%eax;"
 			"ret;"
-			:
+			:"+a"(ret_val)
 			:
 			:
 	)
