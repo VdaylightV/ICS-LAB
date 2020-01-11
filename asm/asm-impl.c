@@ -75,7 +75,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			: "rdx"
 	);
   // TODO: implement
-  return dest;
+  return NULL;
 }
 
 int asm_setjmp(asm_jmp_buf env) {
