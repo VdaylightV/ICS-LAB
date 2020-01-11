@@ -68,7 +68,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			"loop:\n\t"
 			"cmpq %3, %4;"
 			"jnb end2;"
-            "leaq (%2, %4, 1), %%rdx;"			
+            "movq (%2, %4, 1), %%rdx;"			
 			"movb %%dl, (%1, %4, 1);"
 			"addq $0x1, %4;"
 			"jmp loop;"
