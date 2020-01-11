@@ -30,7 +30,7 @@ int asm_popcnt(uint64_t n) {
 	for(; i < 64; i ++) {
 	    asm (
 			"movq %2, %%rbx;"
-			"shrl %%cx, %2;"
+			"shrq %%rcx, %2;"
 			"andq $0x1, %%rbx;"
 			"testq %%rbx, %%rbx;"
 			"je equ;"
