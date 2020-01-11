@@ -85,7 +85,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 }
 
 int asm_setjmp(asm_jmp_buf env) {
-	int ret_val;
+	int ret_val = 0;
 
 	asm (
 			"pushl %%ebx;"
