@@ -33,11 +33,11 @@ int asm_popcnt(uint64_t n) {
 			"testq %%rbx, %%rbx\n\t"
 			"je equ\n\t"
 			"addq $1, %0\n\t"
-			"shrq $1, %%rax\n\t"
+			"shrq $1, %2\n\t"
 			"equ:\n\t"
-			"shrq $1, %%rax\n\t"
+			"shrq $1, %%2\n\t"
 			:"=r"(count), "=r"(n)
-			:"a"(n)
+			:"r"(n)
 			: "rbx"
 		);
 		printf("----n:%lx, count:%lx----\n",n ,count);
