@@ -60,6 +60,10 @@ int asm_popcnt(uint64_t n) {
 
 void *asm_memcpy(void *dest, const void *src, size_t n) {
 	size_t i = 0;
+	char *ret = NULL;
+	char* temp_out = (char *)dest; 
+	char* temp_in = (char *)src;
+	
 	asm (
 			"loop:\n\t"
 			"cmpq %3, %4;"
@@ -72,12 +76,12 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			"movq %1, %%rax;"
 			"movq %%rax, %0;"
 
-			:"+r"(dest)
-			:"r"(dest), "r"(src), "r"(n), "r"(i)
+			:"+r"(ret)
+			:"r"(temp_out), "r"(temp_in), "r"(n), "r"(i)
 			: "rdx", "rax"
 	);
   // TODO: implement
-  return dest;
+  return ret;
 }
 
 int asm_setjmp(asm_jmp_buf env) {
