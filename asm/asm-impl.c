@@ -25,22 +25,23 @@ int64_t asm_add(int64_t a, int64_t b) {
 int asm_popcnt(uint64_t n) {
 
 	uint64_t count = 0;
-	unsigned int i = 0;
-	printf("----n:%lx, count:%lx----\n",n ,count);
+	uint64_t i = 0;
+	//printf("----n:%lx, count:%lx----\n",n ,count);
 	for(; i < 64; i ++) {
 	    asm (
-			"movq %2, %%rbx;"
-			"shrq $0x1, %2;"
+			"movq %4 %%rdi"
+			"movq %3, %%rbx;"
+			"shrq $0x1, %3;"
 			"andq $0x1, %%rbx;"
 			"testq %%rbx, %%rbx;"
 			"je equ;"
 			"addq $0x1, %0;"
 			"equ:\n\t"
-			:"+r"(count), "=a"(n)
-			:"a"(n), "c"(i)
+			:"+r"(count), "=a"(n), "+r"(i)
+			:"a"(n), "r"(i)
 			: "rbx"
 		);
-		printf("----n:%lx, count:%lx----\n",n ,count);
+	//	printf("----n:%lx, count:%lx----\n",n ,count);
 	}
 
   // TODO: implement
