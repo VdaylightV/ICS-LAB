@@ -88,6 +88,7 @@ int asm_setjmp(asm_jmp_buf env) {
 	int ret_val = 0;
 
 	asm (
+			/*
 			"pushq %%rbx;"
 			"movl 8(%%esp), %%ebx;"
 			"movl %%eax, (%%ebx);"
@@ -106,6 +107,33 @@ int asm_setjmp(asm_jmp_buf env) {
 			"ret;"
 			:"+a"(ret_val)
 			:
+			:
+			*/
+            "movq (%1), %0;"
+			"movq %%rax, 8(%1);"
+			"movq %%rbx, 16(%1);"
+			"movq %%rcx, 24(%1);"
+			"movq %%rdx, 32(%1);"
+			"movq %%rsi, 40(%1);"
+			"movq %%rdi, 48(%1);"
+			"movq %%rbp, 56(%1);"
+			"movq %%rsp, 64(%1);"
+			"movq %%r8, 72(%1);"
+			"movq %%r9, 80(%1);"
+			"movq %%r10, 88(%1);"
+			"movq %%r11, 96(%1);"
+			"movq %%r12, 104(%1);"
+			"movq %%r13, 112(%1);"
+			"movq %%r14, 120(%1);"
+			"movq %%r15, 128(%1);"
+			"pushfq;"
+			"movq (%%rsp), %%rax;"
+			"movq %%rax, 136(%1);"
+			"popfq;"
+			"movq 8(%%rsp), 144(%1)"
+
+		    :"+r"(ret_val)
+			:"r"(env)
 			:
 	);
   // TODO: implement
