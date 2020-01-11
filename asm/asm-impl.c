@@ -59,8 +59,18 @@ int asm_popcnt(uint64_t n) {
 }
 
 void *asm_memcpy(void *dest, const void *src, size_t n) {
+	size_t i = 0;
 	asm (
-			
+			"body:\n\t"
+			"cmpl %3, %4;"
+			"jnb end;"
+            "leaq (%2, %4, 1), %%rdx;"			
+			"movb %%dl, (%1, %4, 1)"
+			"end:\n\t"
+
+			:"+m"(dest)
+			:"m"(dest), "m"(src), "r"(n), "r"(i)
+			:
 	);
   // TODO: implement
   return NULL;
