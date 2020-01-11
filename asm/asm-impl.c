@@ -26,7 +26,7 @@ int asm_popcnt(uint64_t n) {
 
 	uint64_t count = 0, i = 0;
 	printf("----n:%lx, count:%lx----\n",n ,count);
-	for(; i < 6; i ++) {
+	for(; i < 2; i ++) {
 	    asm (
 			"movq %2, %%rbx\n\t"
 			"andq $0x1, %%rbx\n\t"
