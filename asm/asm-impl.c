@@ -74,7 +74,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			"movq %%rax, %0;"
 
 			:"+m"(ret)
-			:"m"(dest), "m"(src), "r"(n), "r"(i)
+			:"r"(dest), "r"(src), "r"(n), "r"(i)
 			: "rdx"
 	);
   // TODO: implement
