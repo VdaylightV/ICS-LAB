@@ -106,7 +106,7 @@ int asm_setjmp(asm_jmp_buf env) {
 			:"+a"(ret_val)
 			:
 			:
-	)
+	);
   // TODO: implement
   return ret_val;
 }
