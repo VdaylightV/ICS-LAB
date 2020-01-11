@@ -70,6 +70,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			"addq $0x1, %4;"
 			"jmp loop;"
 			"end:\n\t"
+			"movq %1, %0"
 
 			:"+m"(ret)
 			:"m"(dest), "m"(src), "r"(n), "r"(i)
