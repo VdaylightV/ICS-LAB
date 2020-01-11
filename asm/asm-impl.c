@@ -29,8 +29,8 @@ int asm_popcnt(uint64_t n) {
 	//printf("----n:%lx, count:%lx----\n",n ,count);
 	for(; i < 64; i ++) {
 	    asm (
-			"movq %4 %%rdi;"
-			"cmpq %%rdi, $0x40;"
+			"movq %4 %%rdx;"
+			"cmpq %%rdx, $0x40;"
 			"movq %3, %%rbx;"
 			"shrq $0x1, %3;"
 			"andq $0x1, %%rbx;"
