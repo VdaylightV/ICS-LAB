@@ -43,7 +43,7 @@ int asm_popcnt(uint64_t n) {
 
   // TODO: implement
   
-  return 0;
+  return count;
 }
 
 void *asm_memcpy(void *dest, const void *src, size_t n) {
