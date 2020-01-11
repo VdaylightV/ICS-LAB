@@ -38,6 +38,7 @@ int asm_popcnt(uint64_t n) {
 			:"a"(n), "D"(i)
 			: "rbx"
 		);
+		printf("----n:%lu, count:%lu----\n",n ,count);
 	}
 
   // TODO: implement
