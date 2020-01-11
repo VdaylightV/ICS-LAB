@@ -12,7 +12,7 @@ int main() {
   assert(asm_add(1, 2) == 3);
   assert(asm_add(99, 123) == 222);
   assert(asm_popcnt(0xffffffffffffffffull) == 64);
-//  assert(asm_popcnt(0xff0f00f0f7ff0fffull) == 43);
+  assert(asm_popcnt(0xff0f00f0f7ff0fffull) == 43);
   assert(asm_popcnt(0xffffffff00000000ull) == 32);
 
   // TODO: add memcpy tests here!
