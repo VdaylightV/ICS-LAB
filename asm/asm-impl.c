@@ -36,7 +36,6 @@ int asm_popcnt(uint64_t n) {
 			"shrq $0x1, %2\n\t"
 			"end:\n\t"
 			"equ:\n\t"
-			"shrq $1, %2\n\t"
 			:"+r"(count), "=a"(n)
 			:"a"(n)
 			: "rbx"
