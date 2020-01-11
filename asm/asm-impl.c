@@ -110,7 +110,7 @@ int asm_setjmp(asm_jmp_buf env) {
 			"movq %%rax, 136(%1);"
 			"popfq;"
 			"movq 8(%%rsp), 144(%1);"
-			"mov 8(%1), %%rax;"
+			"movq 8(%1), %%rax;"
 
 		    :"=r"(ret_val)
 			:"r"(env)
