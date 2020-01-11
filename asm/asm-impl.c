@@ -27,22 +27,30 @@ int asm_popcnt(uint64_t n) {
 	uint64_t count = 0;
 	uint64_t i = 0;
 	//printf("----n:%lx, count:%lx----\n",n ,count);
-	for(; i < 64; i ++) {
+	//for(; i < 64; i ++) {
 	    asm (
+			"body:\n\t"
 			"cmpq $0x40, %4;"
+			"jnb end;"
 			"movq %3, %%rbx;"
 			"shrq $0x1, %3;"
 			"andq $0x1, %%rbx;"
 			"testq %%rbx, %%rbx;"
 			"je equ;"
 			"addq $0x1, %0;"
+			"addq $0x1, %4;"
+			"jmp body;"
 			"equ:\n\t"
+			"addq $0x1, %4;"
+			"jmp body;"
+			"end:\n\t"
+
 			:"+r"(count), "=a"(n), "+r"(i)
 			:"a"(n), "r"(i)
 			: "rbx"
 		);
 	//	printf("----n:%lx, count:%lx----\n",n ,count);
-	}
+	//}
 
   // TODO: implement
   
