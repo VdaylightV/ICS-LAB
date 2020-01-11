@@ -88,10 +88,10 @@ int asm_setjmp(asm_jmp_buf env) {
 	int ret_val = 0;
 
 	asm (
-			"pushq %%rbx;"
+			"pushl %%ebx;"
 			"movl 8(%%esp), %%ebx;"
 			"movl %%eax, (%%ebx);"
-			"popq %%rax;"
+			"popl %%eax;"
 			"movl %%eax, 4(%%ebx);"
 			"movl %%ecx, 8(%%ebx);"
 			"movl %%edx, 12(%%ebx);"
