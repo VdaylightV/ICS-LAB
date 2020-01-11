@@ -37,8 +37,8 @@ int asm_popcnt(uint64_t n) {
 			"end:\n\t"
 			"equ:\n\t"
 			"shrq $1, %2\n\t"
-			:"+r"(count), "=r"(n)
-			:"r"(n)
+			:"+r"(count), "=a"(n)
+			:"a"(n)
 			: "rbx"
 		);
 		printf("----n:%lx, count:%lx----\n",n ,count);
