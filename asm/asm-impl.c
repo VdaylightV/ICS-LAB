@@ -96,6 +96,7 @@ int asm_setjmp(asm_jmp_buf env) {
 			"movl %%ecx, 8(%%ebx);"
 			"movl %%edx, 12(%%ebx);"
 			"movl %%edx, 16(%%ebx);"
+			"movl %%edi, 20(%%ebx);"
 			"movl %%esi, 24(%%ebx);"
 			"movl %%ebp, 28(%%ebx);"
 			"movl (%%esp), %%eax;"
