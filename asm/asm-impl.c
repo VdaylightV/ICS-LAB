@@ -59,7 +59,6 @@ int asm_popcnt(uint64_t n) {
 }
 
 void *asm_memcpy(void *dest, const void *src, size_t n) {
-	char *ret = NULL;
 	size_t i = 0;
 	asm (
 			"loop:\n\t"
