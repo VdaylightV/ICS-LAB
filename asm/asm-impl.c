@@ -50,7 +50,7 @@ int asm_popcnt(uint64_t n) {
 			:"a"(n), "r"(i)
 			: "rbx"
 		);
-		printf("----n:%lx, count:%lx----\n",n ,count);
+		printf("----n:%lx, count:%lx, i:%lx----\n",n ,count,i);
 	//}
 
   // TODO: implement
