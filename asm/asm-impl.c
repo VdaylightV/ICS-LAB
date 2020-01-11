@@ -30,14 +30,14 @@ int asm_popcnt(uint64_t n) {
 	for(; i < 64; i ++) {
 	    asm (
 			"movq %2, %%rbx;"
-			"shrl %3, %2;"
+			"shrl %%cx, %2;"
 			"andq $0x1, %%rbx;"
 			"testq %%rbx, %%rbx;"
 			"je equ;"
 			"addq $0x1, %0;"
 			"equ:\n\t"
 			:"+r"(count), "=a"(n)
-			:"a"(n), "r"(i)
+			:"a"(n), "c"(i)
 			: "rbx"
 		);
 		printf("----n:%lx, count:%lx----\n",n ,count);
