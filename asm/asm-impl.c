@@ -25,9 +25,10 @@ int64_t asm_add(int64_t a, int64_t b) {
 int asm_popcnt(uint64_t n) {
 
 	uint64_t count = 0, i = 0;
+	printf("----n:%lx, count:%lx----\n",n ,count);
 	for(; i < 6; i ++) {
 	    asm (
-			"movq %1, %%rbx\n\t"
+			"movq %2, %%rbx\n\t"
 			"andq $0x1, %%rbx\n\t"
 			"testq %%rbx, %%rbx\n\t"
 			"je equ\n\t"
@@ -36,7 +37,7 @@ int asm_popcnt(uint64_t n) {
 			"equ:\n\t"
 			"shrq $1, %%rax\n\t"
 			:"=r"(count), "=r"(n)
-			:"a"(n), "D"(i)
+			:"a"(n)
 			: "rbx"
 		);
 		printf("----n:%lx, count:%lx----\n",n ,count);
