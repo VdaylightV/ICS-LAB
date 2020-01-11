@@ -26,14 +26,14 @@ int asm_popcnt(uint64_t n) {
 	int count = 0, i = 0;
 	for(; i < n; i ++) {
 	    asm (
-			"movl %1, %%ebx\n\t"
-			"andl $0x1, %%ebx\n\t"
-			"testl %%ebx, %%ebx\n\t"
+			"movq %1, %%ebx\n\t"
+			"andq $0x1, %%ebx\n\t"
+			"testq %%ebx, %%ebx\n\t"
 			"je equ\n\t"
-			"addl $1, %0\n\t"
-			"shrl %%eax, %%eax"
+			"addq $1, %0\n\t"
+			"shrq %%eax, %%eax"
 			"equ:\n\t"
-			"shrl %%eax, %%eax"
+			"shrq %%eax, %%eax"
 			:"=r"(count)
 			:"a"(n), "D"(i)
 			: "ebx"
