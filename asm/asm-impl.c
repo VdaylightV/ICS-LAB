@@ -64,12 +64,12 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 	asm (
 			"loop:\n\t"
 			"cmpl %3, %4;"
-			"jnb end;"
+			"jnb end2;"
             "leaq (%2, %4, 1), %%rdx;"			
 			"movb %%dl, (%1, %4, 1)"
 			"addq $0x1, %4;"
 			"jmp loop;"
-			"end:\n\t"
+			"end2:\n\t"
 			"movq %1, %%rax;"
 			"movq %%rax, %0;"
 
