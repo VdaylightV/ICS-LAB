@@ -127,7 +127,7 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 			"testl %%eax, %%eax;"
 			"jne bye"
 			"incl %%eax;"
-			"bye:i\n\t"
+			"bye:\n\t"
 			"ret;"
 			:
 			:
