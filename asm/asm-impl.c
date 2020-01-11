@@ -91,7 +91,7 @@ int asm_setjmp(asm_jmp_buf env) {
 			"pushq %%rbx;"
 			"movl 8(%%esp), %%ebx;"
 			"movl %%eax, (%%ebx);"
-			"popl %%eax;"
+			"popq %%rax;"
 			"movl %%eax, 4(%%ebx);"
 			"movl %%ecx, 8(%%ebx);"
 			"movl %%edx, 12(%%ebx);"
