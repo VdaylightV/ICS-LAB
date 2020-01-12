@@ -112,7 +112,7 @@ static void run(void (*func)(), int rounds) {
     uint64_t st = gettime();
     func();
     uint64_t ed = gettime();
-    elapsed[round] = (double)(ed - st)/(double)CLOCKS_PER_SEC - duration;
+    elapsed[round] = (double)(ed - st)/(double)CLOCKS_PER_SEC - last;
 //	printf("st:%lu\n",st);
 //	printf("ed:%lu\n",ed);
   }
