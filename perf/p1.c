@@ -238,11 +238,11 @@ static inline char* minuspro(char* res, char* m, int len) { // 默认res和m字�
 int64_t multimod_p1() {
 	srand((unsigned int)time(NULL));
 	int64_t a = rand()*4294967296;
-	//printf("a%ld\n", a);
+	printf("a%ld\n", a);
 	int64_t b = rand()*4294967296;
-	//printf("b%ld\n", b);
+	printf("b%ld\n", b);
 	int64_t m = rand()*4294967296;
-	//printf("m%ld\n", m);
+	printf("m%ld\n", m);
 
 	//int64_t a = 4528333102972308783;
 	//int64_t b = 7848072017073365005;
