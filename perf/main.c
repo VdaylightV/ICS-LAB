@@ -107,7 +107,7 @@ static void run(void (*func)(), int rounds) {
   printf("--------THE FOLLOWING ARE STATISTICS---------\n");
   for(int i = 0; i < rounds; i ++) {
       average += elapsed[i];
-	  printf("----No.%d Time:%fs\n",i, elapsed[i]);
+	  printf("        No.%d Time:%fs\n",i, elapsed[i]);
   }
   average /= rounds;
 
