@@ -123,10 +123,10 @@ static void run(void (*func)(), int rounds) {
   double average_update = 0;
 // double variance = 0;
   double variance_update = 0;
-  printf("--------THE FOLLOWING ARE STATISTICS---------\n");
+//  printf("--------THE FOLLOWING ARE STATISTICS---------\n");
   for(int i = 0; i < rounds; i ++) {
       average += elapsed[i];
-	  printf("             No.%d Time:%fs\n",i, elapsed[i]);
+//	  printf("             No.%d Time:%fs\n",i, elapsed[i]);
   }
   average /= rounds;
   
@@ -155,11 +155,11 @@ static void run(void (*func)(), int rounds) {
  
 
   free(elapsed);
-  printf("--------THE FOLLOWING ARE ANALYSES---------\n");
-  printf("          average time : %fs\n", average);
-  printf("          update average time : %fs\n", average_update);
-//  printf("%f  ", average_update);
-//  printf("%f\n", variance_update);
-  printf("          update variance : %f×10^(-8)\n", variance_update);
-  printf("          bad points : %d\n", rounds-counts);
+//  printf("--------THE FOLLOWING ARE ANALYSES---------\n");
+//  printf("          average time : %fs\n", average);
+//  printf("          update average time : %fs\n", average_update);
+  printf("%f  ", average_update);
+  printf("%f\n", variance_update);
+//  printf("          update variance : %f×10^(-8)\n", variance_update);
+//  printf("          bad points : %d\n", rounds-counts);
 }
