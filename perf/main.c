@@ -55,16 +55,16 @@ int main(int argc, char **argv) {
   void (*func)() = lookup(argv[1]);
 
   if(argc == 2) {
-      printf("--------THE FUNCTION CALLED IS %s------\n",argv[1]);
-      printf("--------TOTAL LOOP TIME IS %d---------\n", rounds);
+    //  printf("--------THE FUNCTION CALLED IS %s------\n",argv[1]);
+    //  printf("--------TOTAL LOOP TIME IS %d---------\n", rounds);
 	  run(func, rounds);
   }
   else {
 	  if(argc == 4) {
 	      rounds = str_to_num(argv[3]);
 	  }
-      printf("--------THE FUNCTION CALLED IS %s------\n",argv[1]);
-      printf("--------TOTAL LOOP TIME IS %d---------\n", rounds);
+    //  printf("--------THE FUNCTION CALLED IS %s------\n",argv[1]);
+    //  printf("--------TOTAL LOOP TIME IS %d---------\n", rounds);
 	  run(func, rounds);
   }
 
