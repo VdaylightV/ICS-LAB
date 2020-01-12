@@ -2,7 +2,7 @@
 #include "stdint.h"
 #include "sys/time.h"
 
-int64_t multimod_p2(int64_t a, int64_t b, int64_t m) {
+int64_t multimod_p2() {
 
   uint64_t multi_factor = a;
   uint64_t left = 0;
@@ -22,6 +22,6 @@ int64_t multimod_p2(int64_t a, int64_t b, int64_t m) {
 //  struct timeval tv1;
 //  gettimeofday(&tv1, NULL);
 //  printf("%ldms\n",tv1.tv_usec-tv0.tv_usec);
-  printf("JJJJJJJJJJ\n");  
+//  printf("JJJJJJJJJJ\n");  
   return (int64_t)left;
 }
