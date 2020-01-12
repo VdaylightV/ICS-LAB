@@ -83,6 +83,7 @@ static void (*lookup(const char *fn))() {
 }
 
 static void run(void (*func)(), int rounds) {
+  printf("rounds:%d\n", rounds);
   uint64_t *elapsed = malloc(sizeof(uint64_t) * rounds);
   if (!elapsed) {
     perror("elapsed");
