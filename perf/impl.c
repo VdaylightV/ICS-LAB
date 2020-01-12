@@ -1,7 +1,6 @@
 #include "perf.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "p2.c"
 
 void dummy() {
 }
