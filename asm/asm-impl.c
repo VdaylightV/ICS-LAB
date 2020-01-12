@@ -147,7 +147,7 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 
 			:
 			:"r"(env), "r"(val)
-			:<F12>
+			:
 			/*
 			"movl 4(%%esp), %%ebx;"
 			"movl 8(%%esp), %%eax;"
