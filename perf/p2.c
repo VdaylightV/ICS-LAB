@@ -8,11 +8,11 @@ int64_t multimod_p2() {
 	//printf("JJJJJJJJJJJJJJj%u\n",RAND_MAX);
 	srand((unsigned int)time(NULL));
 	int64_t a = rand()*4294967296;
-//	printf("a%ld\n", a);
+	printf("a%ld\n", a);
 	int64_t b = rand()*4294967296;
-//	printf("b%ld\n", b);
+	printf("b%ld\n", b);
 	int64_t m = rand()*4294967296;
-//	printf("m%ld\n", m);
+	printf("m%ld\n", m);
 
 
   uint64_t multi_factor = a;
