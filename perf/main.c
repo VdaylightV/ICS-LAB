@@ -6,7 +6,6 @@
 #include <time.h>
 #include <stdint.h>
 #include <math.h>
-#include "graphics.h"
 
 #define DECL(fn) void fn();
 
@@ -104,19 +103,19 @@ static void run(void (*func)(), int rounds) {
 
   // TODO: display runtime statistics
   double average = 0;
-  //double variance = 0;
+  double variance = 0;
   for(int i = 0; i < rounds; i ++) {
       average += elapsed[i];
 	  //printf("----Index:%d Time:%f\n",i, elapsed[i]);
   }
   average /= rounds;
 
-  /*
+  
   for(int i = 0; i < rounds; i ++) {
-      variance += (double)pow((elapsed[i] - average), 2);
+      variance += (double)pow((elapsed[i] - average)*1000, 2);
   }
   variance /= rounds;
-  */
+ 
 
   for(int i = 0; i < rounds; i ++) {
       putpixel(i, elapsed[i]*1000, RED);
@@ -124,5 +123,5 @@ static void run(void (*func)(), int rounds) {
 
   free(elapsed);
   printf("average time : %fs\n", average);
-  //printf("variance : %fs\n", variance);
+  printf("variance : %fs\n", variance);
 }
