@@ -123,7 +123,7 @@ int asm_setjmp(asm_jmp_buf env) {
 
 void asm_longjmp(asm_jmp_buf env, int val) {
 	asm (
-			"movq (%0), %1;"
+			"mov (%0), %1;"
 			"movq 16(%0), %%rbx;"
 			"movq 24(%0), %%rcx;"
 			"movq 32(%0), %%rdx;"
@@ -143,7 +143,7 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 			"pushq %%rax;"
 			"popfq;"
 			"movq 8(%0), %%rax;"
-			"impq 8(%%rsp);"
+			"jmpq 8(%%rsp);"
 
 			:
 			:"r"(env), "r"(val)
