@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
 	uint64_t ed = clock();
 	double duration = ed - st;
 	last = duration / CLOCKS_PER_SEC;
-	printf("duration:%f\n", last);
+	//printf("duration:%f\n", last);
 	/*
 	for(int i = 0; i < argc; i++) {
 	    printf("%s\n",argv[i]);
@@ -112,7 +112,7 @@ static void run(void (*func)(), int rounds) {
     uint64_t st = gettime();
     func();
     uint64_t ed = gettime();
-    elapsed[round] = (double)(ed - st)/(double)CLOCKS_PER_SEC;
+    elapsed[round] = (double)(ed - st)/(double)CLOCKS_PER_SEC - duration;
 //	printf("st:%lu\n",st);
 //	printf("ed:%lu\n",ed);
   }
