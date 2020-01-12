@@ -147,7 +147,7 @@ static void run(void (*func)(), int rounds) {
 
   for(int i = 0; i < rounds; i ++) {
       if(elapsed[i] < average*2) {
-          variance_update += (double)pow((elapsed[i] - average)*1000, 2);
+          variance_update += (double)pow((elapsed[i] - average_update)*1000, 2);
 	  } 
   }
   variance_update /= counts;
