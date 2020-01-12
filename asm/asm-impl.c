@@ -109,13 +109,14 @@ int asm_setjmp(asm_jmp_buf env) {
 			"movq (%%rsp), %%rax;"
 			"movq %%rax, 136(%1);"
 			"popfq;"
+			
 			"movq 8(%%rsp), %%rax;"
 			"movq %%rax, 144(%1);"
 			"movq 8(%1), %%rax;"
-
+            
 		    :"+r"(ret_val)
 			:"r"(env)
-			://"rax", "rbx", "rcx", "rdx", "rsi", "rdi", "rbp", "rsp", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15"
+			:"memory"//"rax", "rbx", "rcx", "rdx", "rsi", "rdi", "rbp", "rsp", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15"
 	);
   // TODO: implement
   return ret_val;
