@@ -113,7 +113,7 @@ int asm_setjmp(asm_jmp_buf env) {
 			"movq %%rax, 144(%1);"
 			"movq 8(%1), %%rax;"
 
-		    :"=r"(ret_val)
+		    :"+r"(ret_val)
 			:"r"(env)
 			://"rax", "rbx", "rcx", "rdx", "rsi", "rdi", "rbp", "rsp", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15"
 	);
@@ -123,7 +123,34 @@ int asm_setjmp(asm_jmp_buf env) {
 
 void asm_longjmp(asm_jmp_buf env, int val) {
 	asm (
+			"movq (%0), %1;"
+			"movq 16(%0), %%rbx;"
+			"movq 24(%0), %%rcx;"
+			"movq 32(%0), %%rdx;"
+			"movq 40(%0), %%rsi;"
+			"movq 48(%0), %%rdi;"
+			"movq 56(%0), %%rbp;"
+			"movq 64(%0), %%rsp;"
+			"movq 72(%0), %%r8;"
+			"movq 80(%0), %%r9;"
+			"movq 88(%0), %%r10;"
+			"movq 96(%0), %%r11;"
+			"movq 104(%0), %%r12;"
+			"movq 112(%0), %%13;"
+			"movq 120(%0), %%r14;"
+			"movq 128(%0), %%r15;"
+			"movq 136(%0), %%rax;"
+			"pushq %%rax;"
+			"popfq;"
+			"movq 8(%0), %%rax;"
+			"impq 8(%%rsp);"
+
+			:
+			:"r"(env), "r"(val)
+			:<F12>
+			/*
 			"movl 4(%%esp), %%ebx;"
+			"movl 8(%%esp), %%eax;"
 			"movl 8(%%esp), %%eax;"
 			"movl 24(%%ebx), %%esp;"
 			"movl 32(%%ebx), %%edi;"
@@ -139,10 +166,10 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 			"incl %%eax;"
 			"bye:\n\t"
 			"ret;"
+			:"+r"(val)
+			:"r"(env), "r"(val)
 			:
-			:
-			:
-			
+			*/
 	);
   // TODO: implement
 }
