@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include "stdint.h"
 #include "assert.h"
 #include "string.h"
 #include "sys/time.h"
