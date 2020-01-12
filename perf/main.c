@@ -145,13 +145,15 @@ static void run(void (*func)(), int rounds) {
   }
   variance /= rounds;
 
+  /*
   for(int i = 0; i < rounds; i ++) {
       if(elapsed[i] < average*2) {
           variance_update += (double)pow((elapsed[i] - average_update)*1000, 2);
 	  } 
   }
   variance_update /= counts;
- 
+ */
+
   free(elapsed);
   printf("--------THE FOLLOWING ARE ANALYSES---------\n");
   printf("          average time : %fs\n", average);
