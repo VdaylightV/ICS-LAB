@@ -84,7 +84,8 @@ static void (*lookup(const char *fn))() {
 
 static void run(void (*func)(), int rounds) {
   printf("rounds:%d\n", rounds);
-  uint64_t *elapsed = malloc(sizeof(uint64_t) * rounds);
+  //uint64_t *elapsed = malloc(sizeof(uint64_t) * rounds);
+  double *elapsed = malloc(sizeof(double) * rounds);
   if (!elapsed) {
     perror("elapsed");
     return;
@@ -96,7 +97,7 @@ static void run(void (*func)(), int rounds) {
     func();
     uint64_t ed = gettime();
 	printf("ed:%lu\n",ed);
-    elapsed[round] = (uint64_t)((double)ed - st)/(double)CLOCKS_PER_SEC;
+    elapsed[round] = (double)(ed - st)/(double)CLOCKS_PER_SEC;
 	printf("CLOCKS_PER_SEC:%lu\n",CLOCKS_PER_SEC);
   }
 
