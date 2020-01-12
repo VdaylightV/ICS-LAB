@@ -24,11 +24,22 @@ static int str_to_num(char *str) {
 	return result;
 }
 
+
+static uint64_t gettime_copy() {
+
+  return clock();
+}
+
 static void run(void (*func)(), int rounds);
 static uint64_t gettime();
 static void (*lookup(const char *fn))();
 
 int main(int argc, char **argv) {
+	uint64_t st = gettime_copy();
+	uint64_t ed = clock();
+	double duration = ed - st;
+	double last = duration / CLOCKS_PER_SEC;
+	printf("duration:%f\n", lsat);
 	/*
 	for(int i = 0; i < argc; i++) {
 	    printf("%s\n",argv[i]);
