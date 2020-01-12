@@ -59,8 +59,10 @@ int main(int argc, char **argv) {
 }
 
 static uint64_t gettime() {
+
   // TODO: implement me! 
-  return time(NULL);
+  //return time(NULL);
+  return clock();
 }
 
 static void (*lookup(const char *fn))() {
@@ -91,7 +93,7 @@ static void run(void (*func)(), int rounds) {
     uint64_t st = gettime();
     func();
     uint64_t ed = gettime();
-    elapsed[round] = ed - st;
+    elapsed[round] = (ed - st)/CLOCKS_PER_SEC;
   }
 
   // TODO: display runtime statistics
