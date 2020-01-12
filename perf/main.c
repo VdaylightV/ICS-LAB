@@ -112,11 +112,11 @@ static void run(void (*func)(), int rounds) {
 
   
   for(int i = 0; i < rounds; i ++) {
-      variance += (double)pow((elapsed[i] - average)*100, 2);
+      variance += (double)pow((elapsed[i] - average)*1000, 2);
   }
   variance /= rounds;
  
   free(elapsed);
   printf("average time : %fs\n", average);
-  printf("variance : %fs\n", variance);
+  printf("variance : %f\n", variance);
 }
