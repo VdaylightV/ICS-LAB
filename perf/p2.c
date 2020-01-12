@@ -4,10 +4,14 @@
 #include "sys/time.h"
 
 int64_t multimod_p2() {
-	printf("JJJJJJJJJJJJJJj%u\n",RAND_MAX);
-	int64_t a = 2;
-	int64_t b = 23;
-	int64_t m = 3;
+	//printf("JJJJJJJJJJJJJJj%u\n",RAND_MAX);
+	srand(time(NULL));
+	int64_t a = rand()*4294967296;
+	printf("a%ld\n", a);
+	int64_t b = rand()*4294967296;
+	printf("b%ld\n", b);
+	int64_t m = rand()*4294967296;
+	printf("c%ld\n", c);
 
 
   uint64_t multi_factor = a;
