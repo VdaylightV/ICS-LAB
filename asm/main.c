@@ -56,6 +56,8 @@ static void setjmp_log(const char *str, int value) {
   printf("----head-str:%s\n", head->str);
   printf("----str:%s\n", str);
   assert(strcmp(head->str, str) == 0);
+  printf("----head-value:%s\n", head->value);
+  printf("----value:%s\n", value);
   assert(head->value == value);
   head++;
 }
