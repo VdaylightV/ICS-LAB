@@ -97,7 +97,7 @@ static void run(void (*func)(), int rounds) {
     uint64_t ed = gettime();
 	printf("ed:%lu\n",ed);
     elapsed[round] = (ed - st);//CLOCKS_PER_SEC;
-	printf("CLOCKS_PER_SEC:%lu\d",CLOCKS_PER_SEC);
+	printf("CLOCKS_PER_SEC:%lu\n",CLOCKS_PER_SEC);
   }
 
   // TODO: display runtime statistics
