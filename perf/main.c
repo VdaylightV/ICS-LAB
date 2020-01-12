@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
 	uint64_t ed = clock();
 	double duration = ed - st;
 	double last = duration / CLOCKS_PER_SEC;
-	printf("duration:%f\n", lsat);
+	printf("duration:%f\n", last);
 	/*
 	for(int i = 0; i < argc; i++) {
 	    printf("%s\n",argv[i]);
