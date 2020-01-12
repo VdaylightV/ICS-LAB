@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
 
   if(argc == 2) {
       printf("--------THE FUNCTION CALLED IS %s------\n",argv[1]);
-      printf("--------TOTAL LOOP TIME is%d---------\n", rounds);
+      printf("--------TOTAL LOOP TIME IS %d---------\n", rounds);
 	  run(func, rounds);
   }
   else {
@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
 	      rounds = str_to_num(argv[3]);
 	  }
       printf("--------THE FUNCTION CALLED IS %s------\n",argv[1]);
-      printf("--------TOTAL LOOP TIME is%d---------\n", rounds);
+      printf("--------TOTAL LOOP TIME IS %d---------\n", rounds);
 	  run(func, rounds);
   }
 
