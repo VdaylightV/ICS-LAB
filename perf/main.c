@@ -29,6 +29,7 @@ static uint64_t gettime();
 static void (*lookup(const char *fn))();
 
 int main(int argc, char **argv) {
+  printf("--------THE FUNCTION CALLED IS %s---------\n",argv[1]);
 	/*
 	for(int i = 0; i < argc; i++) {
 	    printf("%s\n",argv[i]);
