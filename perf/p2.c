@@ -12,7 +12,7 @@ int64_t multimod_p2() {
 	int64_t b = rand()*4294967296;
 	printf("b%ld\n", b);
 	int64_t m = rand()*4294967296;
-	printf("c%ld\n", c);
+	printf("m%ld\n", m);
 
 
   uint64_t multi_factor = a;
