@@ -17,7 +17,7 @@ static int str_to_num(char *str) {
 
 	while (*temp != '\0') {
 	    result *= 10;
-		result += *temp;
+		result += (*temp - '0');
 		temp ++;
 	}
 
