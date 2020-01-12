@@ -116,7 +116,7 @@ int asm_setjmp(asm_jmp_buf env) {
             
 		    :"+r"(ret_val)
 			:"r"(env)
-			://"memory"//"rax", "rbx", "rcx", "rdx", "rsi", "rdi", "rbp", "rsp", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15"
+			:
 	);
   // TODO: implement
   return ret_val;
