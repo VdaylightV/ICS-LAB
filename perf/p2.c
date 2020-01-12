@@ -1,9 +1,10 @@
 #include "stdio.h"
-#include "randint.h"
+#include "stdlib.h"
 #include "stdint.h"
 #include "sys/time.h"
 
 int64_t multimod_p2() {
+	printf("JJJJJJJJJJJJJJj%u\n",RAND_MAX);
 
   uint64_t multi_factor = a;
   uint64_t left = 0;
