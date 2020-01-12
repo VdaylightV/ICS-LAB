@@ -10,19 +10,51 @@
 
 PROGRAMS(DECL)
 
+static int str_to_num(char *str) {
+    int result = 0;
+	char *temp = str;
+
+	while (*temp != '\0') {
+	    result *= 10;
+		result += *temp;
+		temp ++;
+	}
+
+	return result;
+}
+
 static void run(void (*func)(), int rounds);
 static uint64_t gettime();
 static void (*lookup(const char *fn))();
 
 int main(int argc, char **argv) {
+	/*
 	for(int i = 0; i < argc; i++) {
 	    printf("%s\n",argv[i]);
 	}
+	*/
   // TODO: parse arguments: set @func and @rounds
+  char r[3] = "-r";
+  int rounds = 1;
+
+  void (*func)() = lookup(argv[1]);
+
+  if(argc == 2) {
+	  run(func, rounds);
+  }
+  else {
+	  if(argc == 4) {
+	      rounds = str_to_int(argv[3]);
+	  }
+	  run(func, rounds);
+  }
+
+  /*
   void (*func)() = lookup("dummy");
   int rounds = 10;
 
   run(func, rounds);
+  */
 }
 
 static uint64_t gettime() {
