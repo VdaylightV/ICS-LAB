@@ -118,5 +118,5 @@ static void run(void (*func)(), int rounds) {
  
   free(elapsed);
   printf("average time : %fs\n", average);
-  printf("variance : %f×E-6\n", variance);
+  printf("variance : %f×10^(-6)\n", variance);
 }
