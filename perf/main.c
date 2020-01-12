@@ -101,6 +101,7 @@ static void run(void (*func)(), int rounds) {
   uint64_t variance = 0;
   for(int i = 0; i < rounds; i ++) {
       average += elapsed[i];
+	  printf("----Index:%d Time:%lu\n",elapsed[i]);
   }
   average /= rounds;
 
