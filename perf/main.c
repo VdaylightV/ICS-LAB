@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
   }
   else {
 	  if(argc == 4) {
-	      rounds = str_to_int(argv[3]);
+	      rounds = str_to_num(argv[3]);
 	  }
 	  run(func, rounds);
   }
