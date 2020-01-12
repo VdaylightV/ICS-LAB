@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include "stdint.h"
 #include "sys/time.h" 
+#include "time.h" 
 
 int64_t multimod_p3() {
 //	struct timeval tv0;
