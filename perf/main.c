@@ -121,7 +121,7 @@ static void run(void (*func)(), int rounds) {
   // TODO: display runtime statistics
   double average = 0;
   double average_update = 0;
-  double variance = 0;
+// double variance = 0;
   double variance_update = 0;
   printf("--------THE FOLLOWING ARE STATISTICS---------\n");
   for(int i = 0; i < rounds; i ++) {
@@ -139,12 +139,12 @@ static void run(void (*func)(), int rounds) {
   }
   average_update /= counts;
 
-  
+  /*
   for(int i = 0; i < rounds; i ++) {
       variance += (double)pow((elapsed[i] - average)*1000, 2);
   }
   variance /= rounds;
-
+  */
   
   for(int i = 0; i < rounds; i ++) {
       if(elapsed[i] < average*2) {
@@ -158,6 +158,6 @@ static void run(void (*func)(), int rounds) {
   printf("--------THE FOLLOWING ARE ANALYSES---------\n");
   printf("          average time : %fs\n", average);
   printf("          update average time : %fs\n", average_update);
-  printf("          variance : %f×10^(-6)\n", variance);
+  printf("          update variance : %f×10^(-6)\n", variance);
   printf("          bad points : %d\n", rounds-counts);
 }
