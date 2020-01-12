@@ -2,6 +2,7 @@
 #include "stdlib.h"
 #include "stdint.h"
 #include "sys/time.h"
+#include "time.h"
 
 int64_t multimod_p2() {
 	//printf("JJJJJJJJJJJJJJj%u\n",RAND_MAX);
