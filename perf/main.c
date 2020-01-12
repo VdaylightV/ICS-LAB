@@ -103,19 +103,21 @@ static void run(void (*func)(), int rounds) {
 
   // TODO: display runtime statistics
   double average = 0;
-  double variance = 0;
+  //double variance = 0;
   for(int i = 0; i < rounds; i ++) {
       average += elapsed[i];
-	  printf("----Index:%d Time:%f\n",i, elapsed[i]);
+	  //printf("----Index:%d Time:%f\n",i, elapsed[i]);
   }
   average /= rounds;
 
+  /*
   for(int i = 0; i < rounds; i ++) {
       variance += (double)pow((elapsed[i] - average), 2);
   }
   variance /= rounds;
+  */
 
   free(elapsed);
   printf("average time : %fs\n", average);
-  printf("variance : %fs\n", variance);
+  //printf("variance : %fs\n", variance);
 }
