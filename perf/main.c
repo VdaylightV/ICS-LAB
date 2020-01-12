@@ -122,6 +122,7 @@ static void run(void (*func)(), int rounds) {
   double average = 0;
   double average_update = 0;
   double variance = 0;
+  double variance_update = 0;
   printf("--------THE FOLLOWING ARE STATISTICS---------\n");
   for(int i = 0; i < rounds; i ++) {
       average += elapsed[i];
@@ -143,6 +144,13 @@ static void run(void (*func)(), int rounds) {
       variance += (double)pow((elapsed[i] - average)*1000, 2);
   }
   variance /= rounds;
+
+  for(int i = 0; i < rounds; i ++) {
+      if(elapsed[i] < average*2) {
+          variance_update += (double)pow((elapsed[i] - average)*1000, 2);
+	  } 
+  }
+  variance_update /= counts;
  
   free(elapsed);
   printf("--------THE FOLLOWING ARE ANALYSES---------\n");
