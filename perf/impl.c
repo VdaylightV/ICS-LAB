@@ -5,6 +5,8 @@
 void dummy() {
 }
 
+int64_t multimod_p2(int64_t a, int64_t b, int64_t m); 
+
 void print_hello() {
   printf("hello\n");
 }
