@@ -88,7 +88,7 @@ int asm_setjmp(asm_jmp_buf env) {
 	int ret_val = 0;
 
 	asm (
-      //      "mov (%1), %0;"
+            "mov (%1), %0;"
 			"movq %%rax, 8(%1);"
 			"movq %%rbx, 16(%1);"
 			"movq %%rcx, 24(%1);"
@@ -124,7 +124,7 @@ int asm_setjmp(asm_jmp_buf env) {
 
 void asm_longjmp(asm_jmp_buf env, int val) {
 	asm (
-	//		"mov %1, (%0);"
+			"mov %1, (%0);"
 			"movq 16(%0), %%rbx;"
 			"movq 24(%0), %%rcx;"
 			"movq 32(%0), %%rdx;"
