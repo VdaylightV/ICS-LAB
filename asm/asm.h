@@ -2,7 +2,7 @@
 #include <unistd.h>
 
 // TODO: set correct array length
-typedef uintptr_t asm_jmp_buf[18];
+typedef uintptr_t asm_jmp_buf[19];
 
 int64_t asm_add(int64_t a, int64_t b);
 int asm_popcnt(uint64_t x);
