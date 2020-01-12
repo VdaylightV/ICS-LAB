@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <time.h>
 #include <stdint.h>
+#include <math.h>
 
 #define DECL(fn) void fn();
 
@@ -58,7 +59,7 @@ int main(int argc, char **argv) {
 }
 
 static uint64_t gettime() {
-  // TODO: implement me!
+  // TODO: implement me! 
   return time(NULL);
 }
 
@@ -94,6 +95,19 @@ static void run(void (*func)(), int rounds) {
   }
 
   // TODO: display runtime statistics
+  uint64_t average = 0;
+  uint64_t variance = 0;
+  for(int i = 0; i < rounds; i ++) {
+      average += elapsed[i];
+  }
+  average /= rounds;
+
+  for(int i = 0; i < rounds; i ++) {
+      variance += (uint64_t)pow((elapsed[i] - average), 2);
+  }
+  variance /= rounds;
 
   free(elapsed);
+  printf("average time : %lus\n", average);
+  printf("variance : %lus\n", variance);
 }
