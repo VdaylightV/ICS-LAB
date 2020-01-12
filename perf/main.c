@@ -92,8 +92,10 @@ static void run(void (*func)(), int rounds) {
 
   for (int round = 0; round < rounds; round++) {
     uint64_t st = gettime();
+	printf("st:%lu\n",st);
     func();
     uint64_t ed = gettime();
+	printf("ed:%lu\n",ed);
     elapsed[round] = (ed - st)/CLOCKS_PER_SEC;
   }
 
