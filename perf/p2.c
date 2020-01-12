@@ -5,6 +5,10 @@
 
 int64_t multimod_p2() {
 	printf("JJJJJJJJJJJJJJj%u\n",RAND_MAX);
+	int64_t a = 2;
+	int64_t b = 23;
+	int64_t m = 3;
+
 
   uint64_t multi_factor = a;
   uint64_t left = 0;
