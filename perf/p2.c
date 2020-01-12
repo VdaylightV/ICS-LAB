@@ -5,7 +5,7 @@
 
 int64_t multimod_p2() {
 	//printf("JJJJJJJJJJJJJJj%u\n",RAND_MAX);
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	int64_t a = rand()*4294967296;
 	printf("a%ld\n", a);
 	int64_t b = rand()*4294967296;
