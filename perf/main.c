@@ -98,7 +98,7 @@ static void run(void (*func)(), int rounds) {
     uint64_t ed = gettime();
 	printf("ed:%lu\n",ed);
     elapsed[round] = (double)(ed - st)/(double)CLOCKS_PER_SEC;
-	printf("CLOCKS_PER_SEC:%lu\n",CLOCKS_PER_SEC);
+	//printf("CLOCKS_PER_SEC:%lu\n",CLOCKS_PER_SEC);
   }
 
   // TODO: display runtime statistics
@@ -106,7 +106,7 @@ static void run(void (*func)(), int rounds) {
   uint64_t variance = 0;
   for(int i = 0; i < rounds; i ++) {
       average += elapsed[i];
-	  printf("----Index:%d Time:%lu\n",i, elapsed[i]);
+	  printf("----Index:%d Time:%f\n",i, elapsed[i]);
   }
   average /= rounds;
 
