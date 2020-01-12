@@ -116,11 +116,6 @@ static void run(void (*func)(), int rounds) {
   }
   variance /= rounds;
  
-
-  for(int i = 0; i < rounds; i ++) {
-      putpixel(i, elapsed[i]*1000, RED);
-  }
-
   free(elapsed);
   printf("average time : %fs\n", average);
   printf("variance : %fs\n", variance);
