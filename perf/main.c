@@ -6,6 +6,7 @@
 #include <time.h>
 #include <stdint.h>
 #include <math.h>
+#include <graphics.h>
 
 #define DECL(fn) void fn();
 
