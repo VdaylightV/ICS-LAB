@@ -233,7 +233,10 @@ static inline char* minuspro(char* res, char* m, int len) { // 默认res和m字�
 
 }
 
-int64_t multimod_p1(int64_t a, int64_t b, int64_t m) {
+int64_t multimod_p1() {
+	int64_t a = 4528333102972308783;
+	int64_t b = 7848072017073365005;
+	int64_t m = 7641517453559215774;
 
 	int64_t res = 0;
 
