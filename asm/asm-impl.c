@@ -106,7 +106,7 @@ int asm_setjmp(asm_jmp_buf env) {
 			"movq %%r14, 120(%1);"
 			"movq %%r15, 128(%1);"
 			"pushfq;"
-			"movq (%%rsp), %%rax;"
+			"mov (%%rsp), %%rax;"
 			"movq %%rax, 136(%1);"
 			"popfq;"
 			"movq 8(%%rsp), %%rax;"
