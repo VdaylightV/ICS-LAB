@@ -30,7 +30,7 @@ int main() {
   // setjmp test starts here
   setjmp_test0();
   setjmp_test1();
-//  printf("ALL TESTS PASS!\n");
+  printf("ALL TESTS PASS!\n");
 }
 
 struct log_entry {
