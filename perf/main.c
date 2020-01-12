@@ -104,6 +104,7 @@ static void run(void (*func)(), int rounds) {
   // TODO: display runtime statistics
   double average = 0;
   double variance = 0;
+  printf("--------THE FOLLOWING ARE STATISTICS---------\n")
   for(int i = 0; i < rounds; i ++) {
       average += elapsed[i];
 	  printf("----No.%d Time:%fs\n",i, elapsed[i]);
