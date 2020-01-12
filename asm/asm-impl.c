@@ -145,7 +145,7 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 			"movq 144(%0), %%rax;"
 			"pushq %%rax;"
 			"movq 8(%0), %%rax;"
-			"jmp 0(%%rsp);"
+			"jmp asm_setjmp;"
 			/*"movq %%rax, 0(%%rsp);"
 			"ret;"*/
 
