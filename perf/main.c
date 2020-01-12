@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
 	}
 	*/
   // TODO: parse arguments: set @func and @rounds
-  char r[3] = "-r";
+//  char r[3] = "-r";
   int rounds = 1;
 
   void (*func)() = lookup(argv[1]);
