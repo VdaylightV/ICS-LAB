@@ -88,7 +88,7 @@ int asm_setjmp(asm_jmp_buf env) {
 	int ret_val = 0;
 
 	asm (
-            "mov (%1), %0;"
+    //        "mov (%1), %0;"
 			"movq %%rax, 8(%1);"
 			"movq %%rbx, 16(%1);"
 			"movq %%rcx, 24(%1);"
@@ -114,7 +114,7 @@ int asm_setjmp(asm_jmp_buf env) {
 			"movq (%1), %%rax;"
 	//		"retq;"
             
-		    :"=r"(ret_val)
+		    :"+r"(ret_val)
 			:"r"(env)
 			:"memory"//"rax", "rbx", "rcx", "rdx", "rsi", "rdi", "rbp", "rsp", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15"
 	);
