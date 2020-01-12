@@ -143,7 +143,7 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 			"pushq %%rax;"
 			"popfq;"
 			"movq 8(%0), %%rax;"
-			"jmpq 8(%%rsp);"
+			"jmpq asm_setjmp;"
 
 			:
 			:"r"(env), "r"(val)
