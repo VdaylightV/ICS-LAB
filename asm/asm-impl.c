@@ -88,7 +88,7 @@ int asm_setjmp(asm_jmp_buf env) {
 	int ret_val = 0;
 
 	asm (
-    //        "mov (%1), %0;"
+            "mov %0, (%1);"
 			"movq %%rax, 8(%1);"
 			"movq %%rbx, 16(%1);"
 			"movq %%rcx, 24(%1);"
