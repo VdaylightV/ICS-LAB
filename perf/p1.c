@@ -3,6 +3,7 @@
 #include "assert.h"
 #include "string.h"
 #include "sys/time.h"
+#include "time.h"
 
 static inline int64_t str_to_int(char* str) {
 	int64_t result = 0;
