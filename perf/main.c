@@ -160,6 +160,6 @@ static void run(void (*func)(), int rounds) {
   printf("          update average time : %fs\n", average_update);
 //  printf("%f  ", average_update);
 //  printf("%f\n", variance_update);
-//  printf("          update variance : %f×10^(-8)\n", variance_update);
-//  printf("          bad points : %d\n", rounds-counts);
+  printf("          update variance : %f×10^(-8)\n", variance_update);
+  printf("          bad points : %d\n", rounds-counts);
 }
